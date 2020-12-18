@@ -34,12 +34,11 @@ services:
     volumes:
       - ./nestjs:/app
       - /app/node_modules
-    ports: 
-      - "80:3000"
     env_file: ./nestjs/.env
-    command: npm run start:prod
+    # command: npm run start:prod
     depends_on:
-      - elasticsearch      
+      - elasticsearch 
+    restart: unless-stopped
     networks:
       - app-network
 
@@ -58,6 +57,7 @@ services:
       - nestjs
     networks:
       - app-network
+
   certbot:
     image: certbot/certbot
     container_name: certbot
