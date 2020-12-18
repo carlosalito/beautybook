@@ -1,1 +1,4 @@
 .env
+
+# elastic data root folder
+/esdata

@@ -10,7 +10,7 @@ services:
     environment:
       discovery.type: "single-node"
       bootstrap.memory_lock: "true"
-      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
       xpack.monitoring.enabled: "true"
       ELASTIC_PASSWORD: $ELASTIC_PASSWORD
       xpack.security.enabled: $ELASTIC_SECURITY
@@ -38,6 +38,8 @@ services:
       - "3000:3000"
     env_file: ./nestjs/.env
     command: npm run start:prod
+    depends_on:
+      - elasticsearch
       
 volumes:
   esdata:
