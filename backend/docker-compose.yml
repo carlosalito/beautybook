@@ -1,0 +1,44 @@
+
+version: '3.7'
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:$ELASTIC_VERSION
+    ports:
+      - $ELASTIC_PORT_MAIN:$ELASTIC_PORT_MAIN
+      - $ELASTIC_PORT_SECONDARY:$ELASTIC_PORT_SECONDARY
+    environment:
+      discovery.type: "single-node"
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      xpack.monitoring.enabled: "true"
+      ELASTIC_PASSWORD: $ELASTIC_PASSWORD
+      xpack.security.enabled: $ELASTIC_SECURITY
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+      
+  kibana:
+    image: docker.elastic.co/kibana/kibana:$ELASTIC_VERSION
+    ports:
+      - $KIBANA_PORT:$KIBANA_PORT
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:$ELASTIC_PORT_MAIN
+      ELASTICSEARCH_USERNAME: $ELASTIC_USER
+      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    depends_on:
+      - elasticsearch
+
+  nestjs:
+    image: nestjs:1.0.0
+    build: ./nestjs/.
+    volumes:
+      - ./nestjs:/app
+      - /app/node_modules
+    ports: 
+      - "3000:3000"
+    env_file: ./nestjs/.env
+    command: npm run start:prod
+      
+volumes:
+  esdata:
+    driver: local
