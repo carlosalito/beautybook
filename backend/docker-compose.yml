@@ -35,12 +35,52 @@ services:
       - ./nestjs:/app
       - /app/node_modules
     ports: 
-      - "3000:3000"
+      - "80:3000"
     env_file: ./nestjs/.env
     command: npm run start:prod
     depends_on:
-      - elasticsearch
-      
+      - elasticsearch      
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - nestjs
+    networks:
+      - app-network
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/html --email carlosalito@gmail.com --agree-tos --no-eff-email --staging -d idheaconsult.com.br  -d www.idheaconsult.com.br
+
 volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /root/beautybook/backend/nestjs/dist/
+      o: bind
   esdata:
     driver: local
+
+networks:
+  app-network:
+    driver: bridge
