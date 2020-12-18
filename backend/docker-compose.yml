@@ -48,11 +48,13 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - web-root:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
+      - dhparam:/etc/ssl/certs
     depends_on:
       - nestjs
     networks:
@@ -77,6 +79,12 @@ volumes:
     driver_opts:
       type: none
       device: /root/beautybook/backend/nestjs/dist/
+      o: bind
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: /root/beautybook/backend/dhparam/
       o: bind
   esdata:
     driver: local
