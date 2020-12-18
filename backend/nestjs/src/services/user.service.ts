@@ -12,13 +12,12 @@ import { UtilsService } from './utils.service';
 
 @Injectable()
 export class UserService {
-  private esService: ElasticSearchService = new ElasticSearchService();
   private fireAuth: auth.Auth;
   private firestore: FirebaseFirestore.Firestore;
-  private bucket;
 
   constructor(
     private service: UtilsService,
+    private esService: ElasticSearchService,
     @InjectFirebaseAdmin() private readonly firebase: FirebaseAdmin,
   ) {
     this.fireAuth = this.firebase.auth;

@@ -1,9 +1,25 @@
 import { NestFactory } from '@nestjs/core';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import express from 'express';
 import { AppModule } from './app.module';
 
-async function bootstrap() {
-  console.log('env', process.env.FIREBASE_DATABASE_URL);
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+const server: express.Express = express();
+
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
+
+async function bootstrap(expressInstance: express.Express) {
+  const app = await NestFactory.create(
+    AppModule,
+    new ExpressAdapter(expressInstance),
+  );
+
+  app.setGlobalPrefix('api');
+
+  app.enableCors();
+  await app.init();
+  await app.listen(process.env.PORT);
 }
-bootstrap();
+
+console.log('Server listen ', process.env.PORT)
+bootstrap(server);

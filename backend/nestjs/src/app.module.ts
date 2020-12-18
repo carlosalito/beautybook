@@ -5,6 +5,7 @@ import { FirebaseModule } from 'nestjs-firebase';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import config from './config/config';
+import { TimelineModule } from './modules/timeline.module';
 import { UsersModule } from './modules/user.module';
 
 @Module({
@@ -21,6 +22,7 @@ import { UsersModule } from './modules/user.module';
     }),
     PassportModule.register({ defaultStrategy: 'bearer' }),
     UsersModule,
+    TimelineModule,
   ],
   controllers: [AppController],
   providers: [AppService],
