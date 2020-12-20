@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import config from './config/config';
 import { TimelineModule } from './modules/timeline.module';
 import { UsersModule } from './modules/user.module';
+import { HttpStrategy } from './strategy/http.strategy';
 
 @Module({
   imports: [
@@ -25,6 +26,6 @@ import { UsersModule } from './modules/user.module';
     TimelineModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, HttpStrategy],
 })
 export class AppModule { }

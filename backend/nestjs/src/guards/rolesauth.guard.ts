@@ -32,6 +32,10 @@ export class RolesAuthGuard extends AuthGuard('bearer') {
       console.log('Liberando rota aberta');
       return true;
     } else {
+      if (auth.split('-').length !== 3) {
+        throw new UnauthorizedException({ error: 'noValidToken' });
+      }
+
       return super.canActivate(this.myContext);
     }
   }

@@ -7,6 +7,8 @@ export class AuthService {
 
   async validateUser(token: string): Promise<any> {
     try {
+      console.log('validateUser', token);
+
       const idToken = await this.userService.findOneByToken(token);
       if (!idToken) {
         return null;
