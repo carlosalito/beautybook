@@ -26,13 +26,12 @@ export class UserController {
 		return await this.userService.updateUser(body);
 	}
 
-	@Get('/:uid/provider/:provider')
+	@Get('/:uid')
 	@HttpCode(200)
 	async Get(
 		@Param('uid') uid: string,
-		@Param('provider') provider: string,
 	) {
-		return await this.userService.me(uid, provider);
+		return await this.userService.me(uid);
 	}
 
 	@Get('updateUserPicture/:action')
@@ -48,11 +47,10 @@ export class UserController {
 	@Get('me/:provider')
 	@HttpCode(200)
 	async Me(
-		@Param('provider') provider: string,
 		@Req() request: Request
 	) {
 		const userUid = request.headers.useruid as string;
-		return await this.userService.me(userUid, provider);
+		return await this.userService.me(userUid);
 	}
 
 

@@ -225,7 +225,7 @@ export class UserService {
     return { user: user, picture: picture };
   }
 
-  me(userUid: string, provider: string) {
+  me(userUid: string) {
     return new Promise(async (resolve, reject) => {
       try {
         const body = {
@@ -247,13 +247,11 @@ export class UserService {
           body
         });
 
-        // console.log(JSON.stringify(body));
-
         const result = response.body as SearchResponse<UserModel>;
         let userPicture = null;
         let user = null;
 
-        if (provider !== 'email' && result.hits.total.value === 0) {
+        if (result.hits.total.value === 0) {
           const userAuth = await this.fireAuth.getUser(userUid);
           const resultCreate = await this.createUserRecord(userAuth);
           userPicture = resultCreate.picture;
