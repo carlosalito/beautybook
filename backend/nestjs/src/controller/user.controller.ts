@@ -26,6 +26,15 @@ export class UserController {
 		return await this.userService.updateUser(body);
 	}
 
+	@Get('/:uid/provider/:provider')
+	@HttpCode(200)
+	async Get(
+		@Param('uid') uid: string,
+		@Param('provider') provider: string,
+	) {
+		return await this.userService.me(uid, provider);
+	}
+
 	@Get('updateUserPicture/:action')
 	@HttpCode(200)
 	async updateUserPicture(

@@ -18,7 +18,7 @@ export class UserModel {
 			},
 	) {
 		Object.assign(this, {
-			uid, name, email, picture, updatedPictureAt
+			uid, name, email, picture, updatedPictureAt,
 		});
 	}
 }
