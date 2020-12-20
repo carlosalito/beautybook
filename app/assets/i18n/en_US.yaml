@@ -1,0 +1,25 @@
+common:
+  loading: Carregando
+signin:
+  skip: Pular
+  signUp: Registre-se
+  or: ou
+  user: E-mail
+  password: Senha
+  enter: Entrar
+signUp:
+  create: Criando novo usuário
+  name: Nome
+  loadingCreate: Registrando...
+  createButton: Cadastrar
+pickImage:
+  cam: Câmera
+  galery: Galeria
+  remove: Remover
+  error: Erro ao salvar imagem
+validators:
+  emptyEmail: Informe seu e-mail
+  invalidEmail: E-mail inválido
+  emptyName: Informe seu nome
+  emptyPassword: Informe senha de 6 dígitos
+  invalidPassword: Senha inválida

@@ -4,16 +4,16 @@ final lightTheme = ThemeData(
     fontFamily: 'Colfax',
     primarySwatch: Colors.grey,
     backgroundColor: Color(0xFFE0E0E0),
-    primaryColor: Color(0xFF008eb2),
-    accentColor: Color(0xFF34c2e6),
+    primaryColor: Color(0xFFB41EB3),
+    accentColor: Color(0xFFDA1993),
     hintColor: Color(0xFFB8BBC6),
     errorColor: Colors.red[600],
     appBarTheme: AppBarTheme(
-        actionsIconTheme: IconThemeData(color: Color(0xFF008eb2)),
+        actionsIconTheme: IconThemeData(color: Color(0xFFB41EB3)),
         textTheme: TextTheme(
             headline6: TextStyle(
-                color: Color(0xFF008eb2), fontWeight: FontWeight.w500)),
-        iconTheme: IconThemeData(color: Color(0xFF008eb2))));
+                color: Color(0xFFB41EB3), fontWeight: FontWeight.w500)),
+        iconTheme: IconThemeData(color: Color(0xFFB41EB3))));
 
 final darkTheme = ThemeData(
     fontFamily: 'Colfax',
@@ -36,3 +36,11 @@ final darkTheme = ThemeData(
             headline6: TextStyle(
                 color: Color(0xFF008eb2), fontWeight: FontWeight.w500)),
         iconTheme: IconThemeData(color: Color(0xFF008eb2))));
+
+class Constants {
+  static double padding = 10.0;
+  static double doublePadding = 16.0;
+  static double borderRadius = 7.0;
+  static OutlineInputBorder inputBorders =
+      OutlineInputBorder(borderRadius: BorderRadius.circular(7.0));
+}

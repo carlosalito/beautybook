@@ -13,9 +13,11 @@ services:
       ES_JAVA_OPTS: "-Xms1g -Xmx1g"
       xpack.monitoring.enabled: "true"
       ELASTIC_PASSWORD: $ELASTIC_PASSWORD
-      xpack.security.enabled: $ELASTIC_SECURITY
+      xpack.security.enabled: $ELASTIC_SECURITY      
     volumes:
       - ./esdata:/usr/share/elasticsearch/data
+    networks:
+      - app-network
       
   kibana:
     image: docker.elastic.co/kibana/kibana:$ELASTIC_VERSION
@@ -27,6 +29,8 @@ services:
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
     depends_on:
       - elasticsearch
+    networks:
+      - app-network
 
   nestjs:
     image: nestjs:1.0.0

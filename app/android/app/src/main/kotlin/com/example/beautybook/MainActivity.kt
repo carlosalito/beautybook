@@ -1,4 +1,4 @@
-package com.example.beautybook
+package com.carlosalito.beautybook
 
 import io.flutter.embedding.android.FlutterActivity
 

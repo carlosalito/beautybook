@@ -1,9 +1,8 @@
-final baseUrl = 'https://us-central1-n2book.cloudfunctions.net/api';
+final baseUrl = 'https://idheaconsult.com.br/api';
 
 class Endpoints {
-  static String me = '$baseUrl/user/me/';
-  static String updateUser = '$baseUrl/user/update';
-  static String createUser = '$baseUrl/user/create';
+  static String me = '$baseUrl/user/#id/provider/#provider';
+  static String user = '$baseUrl/user';
   static String updateUserPicture = '$baseUrl/user/updateUserPicture/';
   static String listPosts = '$baseUrl/timeline/list/';
   static String savePost = '$baseUrl/timeline/post';

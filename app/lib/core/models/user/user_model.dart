@@ -1,3 +1,4 @@
+import 'package:beautybook/core/models/base_model.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -5,21 +6,23 @@ part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
 @JsonSerializable(nullable: true, anyMap: true)
-class UserModel {
+class UserModel extends BaseModel<String> {
   @HiveField(0)
-  String uid;
+  final String uid;
   @HiveField(1)
-  String name;
+  final String name;
   @HiveField(2)
-  String email;
+  final String email;
   @HiveField(3)
-  String picture;
+  final String picture;
   @HiveField(4)
-  DateTime updatedAt;
-  String password;
+  final DateTime updatedAt;
+  @HiveField(5)
+  final DateTime createdAt;
+  final String password;
 
   @JsonKey(ignore: true)
-  String token;
+  final String token;
 
   UserModel(
       {this.uid,
@@ -27,9 +30,18 @@ class UserModel {
       this.email,
       this.picture,
       this.token,
+      this.createdAt,
       this.updatedAt,
       this.password});
 
   factory UserModel.fromJson(Map json) => _$UserModelFromJson(json);
+
+  @override
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  @override
+  get id => this.uid;
+
+  @override
+  List<Object> get props => [uid];
 }

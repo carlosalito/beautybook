@@ -1,7 +1,7 @@
 import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:flutter/material.dart';
 
-final Color primaryBase = Color(0xFF072852);
+final Color primaryBase = Color(0xFFB41EB3);
 
 extension CustomColorScheme on ColorScheme {
   Color borderColor(AppMode mode) {
@@ -31,11 +31,11 @@ extension CustomColorScheme on ColorScheme {
   Color get textContrastColor => Colors.white;
 
   Color cardColor(AppMode mode) {
-    return mode == AppMode.dark ? const Color(0xFF034150) : Colors.white;
+    return mode == AppMode.dark ? const Color(0xFFDA1993) : Colors.white;
   }
 
   Color appBarColor(AppMode mode) {
-    return mode == AppMode.dark ? const Color(0xFF034150) : Colors.grey[350];
+    return mode == AppMode.dark ? const Color(0xFFDA1993) : Colors.grey[350];
   }
 
   Color get successColor => Colors.teal;
