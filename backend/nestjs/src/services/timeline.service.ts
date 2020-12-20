@@ -183,7 +183,7 @@ export class TimelineService {
         }
 
         for (const item of usersToGetData) {
-          blockPromise.push(this.userService.me(item.uid, 'email'));
+          blockPromise.push(this.userService.me(item.uid));
         }
 
         for (const item of imagesData) {
