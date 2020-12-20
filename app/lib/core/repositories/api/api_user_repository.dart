@@ -22,8 +22,7 @@ class ApiUserRepository extends ApiBaseRepository<UserModel>
   @override
   Future<UserModel> findById({String id}) async {
     try {
-      final _url =
-          Endpoints.me.replaceAll('#id', id).replaceAll('#provider', 'email');
+      final _url = Endpoints.me.replaceAll('#id', id);
       final result = await CommonHttp.apiGet(_url, public: false);
       if (result.statusCode == 200) {
         return UserModel.fromJson(jsonDecode(result.body));

@@ -5,6 +5,7 @@ import 'package:beautybook/core/helpers/string/string_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/user/app_mode_enum.dart';
+import 'package:beautybook/core/models/user/login_provider_enum.dart';
 import 'package:beautybook/screens/sign/signin.controller.dart';
 import 'package:beautybook/shared_widgets/base_state/base_state.dart';
 import 'package:beautybook/shared_widgets/show_animations/showup_animation.dart';
@@ -71,9 +72,8 @@ class _SignInFormState extends BaseState<SignInForm> {
             width: 60,
             alignment: Alignment.centerLeft,
             child: FlatButton(
-              onPressed: () {
-                //TODO: _socialLogin(userService, LoginProvider.google);
-              },
+              onPressed: () =>
+                  controller.socialLogin(context, LoginProvider.google),
               padding: EdgeInsets.all(0),
               color: Colors.transparent,
               textColor: Colors.white,

@@ -33,6 +33,7 @@ dependencies:
   flare_flutter: ^2.0.6
   flutter_i18n: ^0.19.4
   path_provider: ^1.6.24
+  google_sign_in: ^4.5.6
   
   flutter:
     sdk: flutter

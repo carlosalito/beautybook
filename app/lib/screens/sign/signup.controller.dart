@@ -144,8 +144,8 @@ abstract class _SignUpControllerBase with Store {
       await _signIn();
       await appController.loadCurrentUser();
       await _persistToken();
-      setLoading(false);
       HiveHelper.saveValueInBox(Storage.user, _user);
+      setLoading(false);
       ExtendedNavigator.root.popAndPush(Routes.navigatorScreen);
     } else if (_result == UserResponseEnum.userExist) {
       Notifications.alert(

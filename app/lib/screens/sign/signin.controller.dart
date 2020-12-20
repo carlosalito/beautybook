@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/constants/storage.dart';
 import 'package:beautybook/core/helpers/hive/hive_helper.dart';
+import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
+import 'package:beautybook/core/models/user/login_provider_enum.dart';
 import 'package:beautybook/core/repositories/user_repository.dart';
 import 'package:beautybook/core/router/router.gr.dart';
 import 'package:beautybook/core/services/account/accounts_service.dart';
@@ -86,16 +88,45 @@ abstract class _SignInControllerBase with Store {
           ExtendedNavigator.root.popAndPush(Routes.navigatorScreen);
         } else {
           Notifications.error(
-              context: context, message: 'Usuário ou senha inválidos');
+              context: context,
+              message: I18nHelper.translate(context, 'signin.userError'));
         }
         setLoading(false);
       } catch (e) {
         print(e);
         Notifications.error(
-            context: context, message: 'Erro ao realizar login');
+            context: context,
+            message: I18nHelper.translate(context, 'signin.genericError'));
         setLoading(false);
         throw (e);
       }
+    }
+  }
+
+  @action
+  socialLogin(BuildContext context, LoginProvider provider) async {
+    setLoading(true);
+
+    try {
+      FocusScope.of(context).requestFocus(FocusNode());
+      final _user = await accountService.socialLogin(provider: provider);
+
+      if (_user != null) {
+        await appController.loadCurrentUser();
+        HiveHelper.saveValueInBox(Storage.user, _user);
+        ExtendedNavigator.root.popAndPush(Routes.navigatorScreen);
+      } else {
+        Notifications.error(
+            context: context,
+            message: I18nHelper.translate(context, 'signin.userError'));
+      }
+      setLoading(false);
+    } catch (e) {
+      Notifications.error(
+          context: context,
+          message: I18nHelper.translate(context, 'signin.genericError'));
+      setLoading(false);
+      throw (e);
     }
   }
 
