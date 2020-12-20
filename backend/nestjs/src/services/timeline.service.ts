@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { classToPlain } from 'class-transformer';
-import { auth } from 'firebase-admin';
 import { FirebaseAdmin, InjectFirebaseAdmin } from 'nestjs-firebase';
 import { COLLECTIONS } from '../constants/collections/collections';
 import { STORAGE } from '../constants/storage/storage';
@@ -14,7 +13,6 @@ import { UtilsService } from './utils.service';
 
 @Injectable()
 export class TimelineService {
-  private fireAuth: auth.Auth;
   private firestore: FirebaseFirestore.Firestore;
 
   constructor(
@@ -23,7 +21,7 @@ export class TimelineService {
     private userService: UserService,
     @InjectFirebaseAdmin() private readonly firebase: FirebaseAdmin,
   ) {
-    // constructor
+    this.firestore = this.firebase.db;
   }
 
   post(post: PostModel, userUid: string): Promise<any> {
@@ -36,10 +34,6 @@ export class TimelineService {
 
         if (!post.userUid) {
           post.userUid = userUid;
-        }
-
-        if (!post.commentarys) {
-          post.commentarys = [];
         }
 
         if (!post.createdAt) {
