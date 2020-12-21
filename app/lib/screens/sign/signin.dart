@@ -167,10 +167,7 @@ class _SignInScreenState extends BaseState<SignInScreen>
       top: 10,
       right: 10,
       child: FlatButton(
-        onPressed: () {
-          // Navigator.pushNamedAndRemoveUntil(context,
-          //     Routes.timeline, (Route<dynamic> route) => false);
-        },
+        onPressed: () => controller.skip(),
         child: Text(translate('$_baseTranslate.skip'),
             style: TextStyle(
               color: Theme.of(context)

@@ -124,4 +124,9 @@ abstract class _SignInControllerBase with Store {
   void signUp() {
     ExtendedNavigator.root.push(Routes.signUpScreen);
   }
+
+  @action
+  void skip() {
+    ExtendedNavigator.root.popAndPush(Routes.navigatorScreen);
+  }
 }

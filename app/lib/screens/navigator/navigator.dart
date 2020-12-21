@@ -90,10 +90,11 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
               iconData: BeautybookIcons.boticario,
               label: 'Novidades',
             ),
-            FFNavigationBarItem(
-              iconData: BeautybookIcons.iconProfile,
-              label: 'Perfil',
-            ),
+            if (appController.user != null && appController.user.uid != null)
+              FFNavigationBarItem(
+                iconData: BeautybookIcons.iconProfile,
+                label: 'Perfil',
+              ),
           ],
         ),
       );

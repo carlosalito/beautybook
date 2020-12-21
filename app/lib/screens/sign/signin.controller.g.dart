@@ -173,6 +173,17 @@ mixin _$SignInController on _SignInControllerBase, Store {
   }
 
   @override
+  void skip() {
+    final _$actionInfo = _$_SignInControllerBaseActionController.startAction(
+        name: '_SignInControllerBase.skip');
+    try {
+      return super.skip();
+    } finally {
+      _$_SignInControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 loading: ${loading},
