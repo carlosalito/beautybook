@@ -5,7 +5,8 @@ common:
   hours: horas atrás
   yesterday: ontem
   outputFormat: dd/MM/yyyy HH:mm
-
+  lightMode: Modo claro
+  darkMode: Modo escuro
 signin:
   skip: Pular
   signUp: Registre-se
@@ -39,6 +40,7 @@ validators:
 navigator:
   profileHint: Perfil
   noLogged: Login
+  signoutError: Erro ao sair da conta
 timeline:
   listError: Erro ao lista posts.
   endList: Fim das postagens...
@@ -50,7 +52,7 @@ post:
   error: Erro ao salvar post.
   errorGalery: Erro ao atualizar imagens do Post
   newPost: Nova postagem,
-  newPosts: Novas postagens,      
+  newPosts: Novas postagens      
   form: 
     title: Título,
     body: Sua postagem fantástica...
@@ -60,4 +62,10 @@ post:
     error: Erro ao deletar postagem
 boticarioNews:
   error: Erro ao listar novidas Boticário
-
+profile:
+  title: Perfil
+  create: Criar perfil
+  errorUpdatePicture: Erro ao atualizar sua foto
+  errorUpdate: Erro ao atualizar dados
+  loadingUpdate: Atualizando...
+  update: Salvar

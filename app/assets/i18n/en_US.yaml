@@ -1,25 +1,71 @@
 common:
-  loading: Carregando
+  loading: Loading
+  now: Now
+  minutes: minutes ago
+  hours: hours ago
+  yesterday: yesterday
+  outputFormat: MM/dd/yyyy HH:mm
+  lightMode: Light mode
+  darkMode: Dark mode
 signin:
-  skip: Pular
-  signUp: Registre-se
-  or: ou
-  user: E-mail
-  password: Senha
-  enter: Entrar
+  skip: Skip
+  signUp: Sign Up
+  or: or
+  user: Email
+  password: Password
+  enter: Enter
+  userError: Username or password is invalid
+  genericError: Error signing in
 signUp:
-  create: Criando novo usuário
-  name: Nome
-  loadingCreate: Registrando...
-  createButton: Cadastrar
+  create: Creating new user
+  name: Name
+  loadingCreate: Registering...
+  createButton: Register
+  userExist: The email address is registered.
+  error: Error registering user.
 pickImage:
-  cam: Câmera
-  galery: Galeria
-  remove: Remover
-  error: Erro ao salvar imagem
+  cam: Camera
+  galery: Galery
+  remove: Remove
+  error: Error saving image
 validators:
-  emptyEmail: Informe seu e-mail
-  invalidEmail: E-mail inválido
-  emptyName: Informe seu nome
-  emptyPassword: Informe senha de 6 dígitos
-  invalidPassword: Senha inválida
+  emptyEmail: Enter your email
+  invalidEmail: Invalid email
+  emptyName: Enter your name
+  emptyPassword: Enter 6 digits password
+  invalidPassword: Invalid password
+  emptyTitle: Enter a title
+  emptyPost: Write something to save
+  largePost: Posts must contain a maximum of 280 characters
+navigator:
+  profileHint: Profile
+  noLogged: Login
+  signoutError: Error signing out
+timeline:
+  listError: Error listing posts.
+  endList: End of posts...
+  more: View more
+  less: View less    
+post:
+  new: Create a new post...
+  title: Post
+  error: Erro4 saving post.
+  errorGalery: Error updating post images
+  newPost: New post,
+  newPosts: New posts
+  form: 
+    title: Title,
+    body: Your fantastic post...
+  delete:
+    confirm: Delete
+    cancel: Cancel
+    error: Error deleting post
+boticarioNews:
+  error: Error when listing Boticário news
+profile:
+  title: Profile
+  create: Create profile
+  errorUpdatePicture: Erro updating your profile image
+  errorUpdate: Erro updating user
+  loadingUpdate: Updating...
+  update: Save
