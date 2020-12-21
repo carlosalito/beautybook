@@ -1,12 +1,11 @@
 import 'dart:io';
 
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/core/services/notification/notifications.service.dart';
 import 'package:beautybook/core/services/utils/utils.services.dart';
 import 'package:beautybook/shared_widgets/base_state/base_state.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -68,7 +67,7 @@ class _PickImageState extends BaseState<PickImage> {
                             height: size.width * .2,
                             child: Icon(BeautybookIcons.iconCam,
                                 size: 30,
-                                color: Theme.of(context).primaryColor)),
+                                color: Theme.of(context).accentColor)),
                         onPressed: () async {
                           final bool result =
                               await _processImage(ImageSource.camera);
@@ -88,7 +87,7 @@ class _PickImageState extends BaseState<PickImage> {
                           padding: EdgeInsets.all(20),
                           height: size.width * .2,
                           child: Icon(BeautybookIcons.iconGalery,
-                              size: 30, color: Theme.of(context).primaryColor)),
+                              size: 30, color: Theme.of(context).accentColor)),
                       onPressed: () async {
                         final bool result =
                             await _processImage(ImageSource.gallery);
@@ -111,7 +110,7 @@ class _PickImageState extends BaseState<PickImage> {
                                     size: 30,
                                     color: Theme.of(context).errorColor)),
                             onPressed: () async {
-                              widget.onImageSelected(null);
+                              widget.onImageSelected('');
                             },
                           ),
                           Text(
@@ -150,26 +149,19 @@ class _PickImageState extends BaseState<PickImage> {
         final task =
             UtilsServices.uploadFile(widget.firebasePath, croppedImage);
 
-        task.snapshotEvents.listen((event) async {
-          setState(() {
-            _progress =
-                ((task.snapshot.bytesTransferred / task.snapshot.totalBytes) *
-                    100);
-          });
+        await task.whenComplete(() => {
+              setState(() {
+                _progress = 0.0;
+              })
+            });
 
-          if (event.bytesTransferred >= event.totalBytes &&
-              event.state == TaskState.success) {
-            String url = await event.ref.getDownloadURL();
-            widget.onImageSelected(url);
-          }
-        }, onError: (e) {
-          widget.onImageSelected(null);
-        });
+        String url = await UtilsServices.getFireUrl(widget.firebasePath);
+        widget.onImageSelected(url);
       } else {
         url = await UtilsServices.saveTempImage(_image, source);
+        widget.onImageSelected(url);
       }
 
-      widget.onImageSelected(url);
       return Future.value(true);
     } catch (e) {
       return Future.value(false);

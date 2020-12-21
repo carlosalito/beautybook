@@ -53,4 +53,29 @@ class ApiUserRepository extends ApiBaseRepository<UserModel>
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<void> updateUserPicture(String action) async {
+    try {
+      final String url = '${Endpoints.updateUserPicture}$action';
+      final _result = await CommonHttp.apiGet(url, public: false);
+
+      if (_result.statusCode != 200) throw Exception(_result.body);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<void> updateUser(UserModel user) async {
+    try {
+      final String url = Endpoints.user;
+      final _result =
+          await CommonHttp.apiPut(url, jsonEncode(user), public: false);
+
+      if (_result.statusCode != 200) throw Exception(_result.body);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
