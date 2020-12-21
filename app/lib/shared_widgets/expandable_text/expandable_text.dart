@@ -15,7 +15,7 @@ class ExpandableText extends StatefulWidget {
 class _ExpandableTextState extends State<ExpandableText>
     with TickerProviderStateMixin<ExpandableText> {
   bool _isExpanded = false;
-  static const defaultLines = 5;
+  static const defaultLines = 3;
 
   @override
   void initState() {

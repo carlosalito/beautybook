@@ -35,7 +35,9 @@ class StringHelper {
   static String validateTitle(BuildContext context, String value) {
     return value == null || value.isEmpty
         ? I18nHelper.translate(context, "validators.emptyTitle")
-        : null;
+        : value.length > 280
+            ? I18nHelper.translate(context, "validators.largePostTitle")
+            : null;
   }
 
   static String validatePost(BuildContext context, String value) {

@@ -37,6 +37,7 @@ validators:
   emptyTitle: Enter a title
   emptyPost: Write something to save
   largePost: Posts must contain a maximum of 280 characters
+  largePostTitle: Title must contain a maximum of 40 characters
 navigator:
   profileHint: Profile
   noLogged: Login
