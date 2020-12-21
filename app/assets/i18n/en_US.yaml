@@ -51,7 +51,7 @@ post:
   title: Post
   error: Erro4 saving post.
   errorGalery: Error updating post images
-  newPost: New post,
+  newPost: New post
   newPosts: New posts
   form: 
     title: Title,

@@ -190,7 +190,13 @@ abstract class _TimelineControllerBase with Store {
     page = 0;
     pageInfo = PageInfoModel(totalPages: 0, totalRows: 0);
     await list(context, reset: true);
+    _updateLastRead();
     setRefreshing(false);
+  }
+
+  void _updateLastRead() {
+    HiveHelper.saveValueInBox(Storage.lastRead, DateTime.now());
+    setNewPosts(0);
   }
 
   @action

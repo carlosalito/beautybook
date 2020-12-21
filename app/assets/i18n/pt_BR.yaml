@@ -51,7 +51,7 @@ post:
   title: Postagem
   error: Erro ao salvar post.
   errorGalery: Erro ao atualizar imagens do Post
-  newPost: Nova postagem,
+  newPost: Nova postagem
   newPosts: Novas postagens      
   form: 
     title: Título,
