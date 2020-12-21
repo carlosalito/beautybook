@@ -135,6 +135,12 @@ class _PickImageState extends BaseState<PickImage> {
       final ImagePicker _picker = ImagePicker();
       final PickedFile _imagePicked = await _picker.getImage(
           source: source, maxWidth: widget.maxWidth, imageQuality: 70);
+
+      if (_imagePicked == null) {
+        widget.onImageSelected(null);
+        return Future.value(true);
+      }
+
       final File _image = File(_imagePicked.path);
 
       File croppedImage = _image;

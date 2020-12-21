@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StringHelper {
+  static String initialLetters(String name) {
+    final _arrayName = name.split(' ');
+    String _initial = _arrayName[0].substring(0, 1);
+    if (_arrayName[1] != null) {
+      _initial += _arrayName[1].substring(0, 1);
+    }
+    return _initial.toUpperCase();
+  }
+
   static String validateEmail(BuildContext context, String value) {
     final bool emailValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")

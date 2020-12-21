@@ -256,7 +256,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: CircularAvatar(
               noCache: true,
               size: 120,
-              picture: appController.user?.picture ?? '',
+              picture: appController.user?.picture ??
+                  (StringHelper.initialLetters(appController.user?.name) ?? ''),
             ),
           ),
           Center(
@@ -292,7 +293,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onImageSelected: (picture) async {
                 if (picture == '') {
                   await controller.updateUserPicture(context, 'clear');
-                } else {
+                } else if (picture != null) {
                   await controller.updateUserPicture(context, 'update',
                       picture: picture);
                 }
