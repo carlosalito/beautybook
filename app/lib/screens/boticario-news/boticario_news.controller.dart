@@ -8,7 +8,7 @@ import 'package:mobx/mobx.dart';
 
 part 'boticario_news.controller.g.dart';
 
-@injectable
+@singleton
 class BoticarioNewsController = _BoticarioNewsControllerBase
     with _$BoticarioNewsController;
 

@@ -1,10 +1,12 @@
 import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
+import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
 import 'package:beautybook/core/helpers/string/string_helper.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/boticario-news/boticario-news_model.dart';
 import 'package:beautybook/screens/boticario-news/boticario_news.controller.dart';
+import 'package:beautybook/shared_widgets/expandable_text/expandable_text.dart';
 import 'package:beautybook/shared_widgets/show_animations/background_unfocus/background_unfocus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -48,7 +50,7 @@ class _BoticarioNewsState extends State<BoticarioNews> {
                 ListView.builder(
                   itemCount: controller.newsList.length,
                   itemBuilder: (context, index) =>
-                      _newsTile(controller.newsList[index]),
+                      _newsTile(controller.newsList[index], index),
                 ),
               ],
             ),
@@ -58,12 +60,25 @@ class _BoticarioNewsState extends State<BoticarioNews> {
     });
   }
 
-  Widget _newsTile(BoticarioNewsModel news) {
-    return Padding(
+  double _resolveMarginBottom(int index) {
+    return index == controller.newsList.length - 1 ? 25.0 : 0.0;
+  }
+
+  Widget _newsTile(BoticarioNewsModel news, int index) {
+    return Container(
       padding: EdgeInsets.all(Constants.padding),
+      margin: EdgeInsets.only(
+          top: 10, left: 7, right: 7, bottom: _resolveMarginBottom(index)),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.cardColor(appController.appMode),
+        borderRadius: BorderRadius.circular(Constants.borderRadius),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _newsHeader(news),
+          Divider(),
+          _newsBody(news),
         ],
       ),
     );
@@ -71,6 +86,7 @@ class _BoticarioNewsState extends State<BoticarioNews> {
 
   Widget _newsHeader(BoticarioNewsModel news) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           news.user.name,
@@ -86,6 +102,14 @@ class _BoticarioNewsState extends State<BoticarioNews> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _newsBody(BoticarioNewsModel news) {
+    return ExpandableText(
+      text: news.message.content,
+      moreLabel: I18nHelper.translate(context, 'timeline.more'),
+      lessLabel: I18nHelper.translate(context, 'timeline.less'),
     );
   }
 
