@@ -24,15 +24,16 @@ class UserModel extends BaseModel<String> {
   @JsonKey(ignore: true)
   final String token;
 
-  UserModel(
-      {this.uid,
-      this.name,
-      this.email,
-      this.picture,
-      this.token,
-      this.createdAt,
-      this.updatedAt,
-      this.password});
+  UserModel({
+    this.uid,
+    this.name,
+    this.email,
+    this.picture,
+    this.token,
+    this.createdAt,
+    this.updatedAt,
+    this.password,
+  });
 
   factory UserModel.fromJson(Map json) => _$UserModelFromJson(json);
 

@@ -5,7 +5,6 @@ class Endpoints {
   static String user = '$baseUrl/user';
   static String updateUserPicture = '$baseUrl/user/updateUserPicture/';
   static String listPosts = '$baseUrl/timeline/list/';
-  static String savePost = '$baseUrl/timeline/post';
-  static String deltePost = '$baseUrl/timeline/delete/';
+  static String post = '$baseUrl/timeline';
   static String updateGalery = '$baseUrl/timeline/updateGalery/';
 }

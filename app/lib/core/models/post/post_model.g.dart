@@ -15,9 +15,6 @@ PostModel _$PostModelFromJson(Map json) {
     title: json['title'] as String,
     body: json['body'] as String,
     pictures: (json['pictures'] as List)?.map((e) => e as String)?.toList(),
-    commentarys: (json['commentarys'] as List)
-        ?.map((e) => e == null ? null : CommentaryModel.fromJson(e as Map))
-        ?.toList(),
     createdAt: json['createdAt'] == null
         ? null
         : DateTime.parse(json['createdAt'] as String),
@@ -35,7 +32,6 @@ Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
       'title': instance.title,
       'body': instance.body,
       'pictures': instance.pictures,
-      'commentarys': instance.commentarys,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };

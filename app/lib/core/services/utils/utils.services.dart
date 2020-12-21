@@ -30,7 +30,7 @@ class UtilsServices {
         .substring(1);
   }
 
-  static UploadTask uploadFileAndGetUrl(String fileLocationUrl, File file) {
+  static UploadTask uploadFile(String fileLocationUrl, File file) {
     try {
       UploadTask task =
           FirebaseStorage.instance.ref().child(fileLocationUrl).putFile(file);
@@ -39,6 +39,10 @@ class UtilsServices {
     } catch (e) {
       return null;
     }
+  }
+
+  static Future<String> getFireUrl(String ref) async {
+    return await FirebaseStorage.instance.ref().child(ref).getDownloadURL();
   }
 
   static getStorageReference(String url) {
@@ -54,6 +58,16 @@ class UtilsServices {
       return Future.value(newPath);
     } else {
       return Future.value(file.path);
+    }
+  }
+
+  static Future<bool> deleteFirebaseFile(String url) async {
+    try {
+      final _uid = getStorageReference(url);
+      await FirebaseStorage.instance.ref().child(_uid).delete();
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

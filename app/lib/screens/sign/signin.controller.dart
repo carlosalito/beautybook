@@ -25,13 +25,8 @@ abstract class _SignInControllerBase with Store {
   _SignInControllerBase(
       {this.appController, this.accountService, this.repository});
 
-  BuildContext context;
-
   @observable
   bool loading = false;
-
-  @observable
-  String error;
 
   @observable
   var formKey = GlobalKey<FormState>();
@@ -55,11 +50,6 @@ abstract class _SignInControllerBase with Store {
   dispose() {
     emailController.dispose();
     passwordController.dispose();
-  }
-
-  @action
-  void setContext(BuildContext _context) {
-    context = _context;
   }
 
   @action

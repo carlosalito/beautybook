@@ -147,8 +147,8 @@ class _PickImageState extends BaseState<PickImage> {
       }
 
       if (widget.sendImmediately) {
-        final task = UtilsServices.uploadFileAndGetUrl(
-            widget.firebasePath, croppedImage);
+        final task =
+            UtilsServices.uploadFile(widget.firebasePath, croppedImage);
 
         task.snapshotEvents.listen((event) async {
           setState(() {

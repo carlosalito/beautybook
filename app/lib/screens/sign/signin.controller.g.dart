@@ -24,21 +24,6 @@ mixin _$SignInController on _SignInControllerBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_SignInControllerBase.error');
-
-  @override
-  String get error {
-    _$errorAtom.reportRead();
-    return super.error;
-  }
-
-  @override
-  set error(String value) {
-    _$errorAtom.reportWrite(value, super.error, () {
-      super.error = value;
-    });
-  }
-
   final _$formKeyAtom = Atom(name: '_SignInControllerBase.formKey');
 
   @override
@@ -131,6 +116,15 @@ mixin _$SignInController on _SignInControllerBase, Store {
     });
   }
 
+  final _$socialLoginAsyncAction =
+      AsyncAction('_SignInControllerBase.socialLogin');
+
+  @override
+  Future socialLogin(BuildContext context, LoginProvider provider) {
+    return _$socialLoginAsyncAction
+        .run(() => super.socialLogin(context, provider));
+  }
+
   final _$_SignInControllerBaseActionController =
       ActionController(name: '_SignInControllerBase');
 
@@ -140,17 +134,6 @@ mixin _$SignInController on _SignInControllerBase, Store {
         name: '_SignInControllerBase.dispose');
     try {
       return super.dispose();
-    } finally {
-      _$_SignInControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setContext(BuildContext _context) {
-    final _$actionInfo = _$_SignInControllerBaseActionController.startAction(
-        name: '_SignInControllerBase.setContext');
-    try {
-      return super.setContext(_context);
     } finally {
       _$_SignInControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -193,7 +176,6 @@ mixin _$SignInController on _SignInControllerBase, Store {
   String toString() {
     return '''
 loading: ${loading},
-error: ${error},
 formKey: ${formKey},
 emailController: ${emailController},
 emailFocus: ${emailFocus},

@@ -1,8 +1,8 @@
 import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
-import 'package:beautybook/core/helpers/input/input_helper.dart';
 import 'package:beautybook/core/helpers/string/string_helper.dart';
+import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/user/app_mode_enum.dart';
@@ -196,8 +196,10 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
           contentPadding:
               EdgeInsets.only(bottom: 10, top: 10, left: 15, right: 15),
           enabledBorder:
-              InputHelper.enableBorder(context, appController.appMode),
-          focusedBorder: InputHelper.focusedBorder(context),
+              ThemeHelper.enableBorder(context, appController.appMode),
+          focusedBorder: ThemeHelper.focusedBorder(context),
+          errorBorder: ThemeHelper.errorBorder(context),
+          focusedErrorBorder: ThemeHelper.errorBorder(context),
         ),
       ),
     );
@@ -237,8 +239,10 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
           contentPadding:
               EdgeInsets.only(bottom: 10, top: 10, left: 15, right: 15),
           enabledBorder:
-              InputHelper.enableBorder(context, appController.appMode),
-          focusedBorder: InputHelper.focusedBorder(context),
+              ThemeHelper.enableBorder(context, appController.appMode),
+          focusedBorder: ThemeHelper.focusedBorder(context),
+          errorBorder: ThemeHelper.errorBorder(context),
+          focusedErrorBorder: ThemeHelper.errorBorder(context),
         ),
       ),
     );
@@ -276,8 +280,10 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
           contentPadding:
               EdgeInsets.only(bottom: 10, top: 10, left: 15, right: 15),
           enabledBorder:
-              InputHelper.enableBorder(context, appController.appMode),
-          focusedBorder: InputHelper.focusedBorder(context),
+              ThemeHelper.enableBorder(context, appController.appMode),
+          focusedBorder: ThemeHelper.focusedBorder(context),
+          errorBorder: ThemeHelper.errorBorder(context),
+          focusedErrorBorder: ThemeHelper.errorBorder(context),
         ),
       ),
     );

@@ -25,7 +25,7 @@ class CommonHttp {
   static Future<String> _refreshToken(String token) async {
     final tokenIsValid = await _storedTokenIsValid();
 
-    if (tokenIsValid) return token;
+    if (tokenIsValid && token != null && token.isNotEmpty) return token;
 
     final authService = getIt<AuthService>();
     token = await authService.refreshToken();
@@ -35,15 +35,22 @@ class CommonHttp {
     return token;
   }
 
+  static Future<String> _getToken(bool public) async {
+    String _token = Storage.publicToken;
+    if (!public) {
+      _token = HiveHelper.getValueInBox(Storage.token);
+      _token = await _refreshToken(HiveHelper.getValueInBox(Storage.token));
+    }
+
+    return _token;
+  }
+
   static Future<http.Response> apiPost(
     String url,
     param, {
     bool public,
   }) async {
-    String token = Storage.publicToken;
-    if (!public) {
-      token = await _refreshToken(HiveHelper.getValueInBox(Storage.token));
-    }
+    final token = await _getToken(public);
 
     final UserModel user = HiveHelper.getValueInBox(Storage.user);
     final Map<String, String> _headers = {
@@ -63,10 +70,7 @@ class CommonHttp {
     dynamic param, {
     bool public,
   }) async {
-    String token = Storage.publicToken;
-    if (!public) {
-      token = await _refreshToken(token);
-    }
+    final token = await _getToken(public);
 
     final UserModel user = HiveHelper.getValueInBox(Storage.user);
     final Map<String, String> _headers = {
@@ -85,10 +89,7 @@ class CommonHttp {
     String url, {
     bool public,
   }) async {
-    String token = Storage.publicToken;
-    if (!public) {
-      token = await _refreshToken(token);
-    }
+    final token = await _getToken(public);
 
     final UserModel user = HiveHelper.getValueInBox(Storage.user);
     final Map<String, String> _headers = {
@@ -106,10 +107,7 @@ class CommonHttp {
     String url, {
     bool public,
   }) async {
-    String token = Storage.publicToken;
-    if (!public) {
-      token = await _refreshToken(token);
-    }
+    final token = await _getToken(public);
 
     final UserModel user = HiveHelper.getValueInBox(Storage.user);
     final Map<String, String> _headers = {

@@ -1,7 +1,14 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/theme.dart';
+import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
+import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/screens/navigator/navigator.controller.dart';
+import 'package:beautybook/screens/navigator/widgets/header.dart';
+import 'package:beautybook/screens/timeline/timeline_screen.dart';
+import 'package:beautybook/shared_widgets/base_state/base_state.dart';
+import 'package:beautybook/shared_widgets/circular_avatar/circular_avatar.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -11,7 +18,8 @@ class NavigatorScreen extends StatefulWidget {
   _NavigatorScreenState createState() => _NavigatorScreenState();
 }
 
-class _NavigatorScreenState extends State<NavigatorScreen> {
+class _NavigatorScreenState extends BaseState<NavigatorScreen> {
+  static const _baseTranslate = 'navigator';
   final controller = getIt<NavigatorController>();
   final appController = getIt<AppController>();
 
@@ -20,7 +28,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      Container(),
+      TimelineScreen(),
       Container(),
       Container(),
     ];
@@ -28,8 +36,17 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
     return Observer(builder: (context) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(controller.appBarTitle),
-          actions: [],
+          brightness: appController.appMode == AppMode.dark
+              ? Brightness.dark
+              : Brightness.light,
+          iconTheme: Theme.of(context).iconTheme,
+          actionsIconTheme: Theme.of(context).iconTheme,
+          backgroundColor:
+              Theme.of(context).colorScheme.cardColor(appController.appMode),
+          title: NavigatorHeader(),
+          actions: [
+            _profileAction(),
+          ],
         ),
         body: SafeArea(
           child: PageView(
@@ -69,6 +86,43 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
         ),
       );
     });
+  }
+
+  Widget _profileAction() {
+    return Padding(
+        padding: EdgeInsets.only(right: Constants.padding * .5),
+        child: FlatButton(
+          padding: EdgeInsets.all(0),
+          onPressed: () {
+            // if (userServices.userProvider.user != null &&
+            //     userServices.userProvider.user.uid != '') {
+            //   Navigator.pushNamed(context, Routes.profile);
+            // } else {
+            //   Navigator.pushNamedAndRemoveUntil(
+            //       context, Routes.signin, (Route<dynamic> route) => false);
+            // }
+          },
+          color: Colors.transparent,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                  appController.user != null && appController.user.uid != ''
+                      ? ''
+                      : translate('$_baseTranslate.noLogged'),
+                  style: TextStyle(color: Theme.of(context).primaryColor)),
+              SizedBox(width: Constants.padding * 0.5),
+              appController.user != null
+                  ? CircularAvatar(
+                      size: 35,
+                      picture: appController.user.picture,
+                    )
+                  : Icon(BeautybookIcons.iconProfile,
+                      color: Theme.of(context).primaryColor)
+            ],
+          ),
+        ));
   }
 
   Future<void> _signOut() async {

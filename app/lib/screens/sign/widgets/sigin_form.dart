@@ -1,7 +1,7 @@
 import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/extensions/theme.dart';
-import 'package:beautybook/core/helpers/input/input_helper.dart';
 import 'package:beautybook/core/helpers/string/string_helper.dart';
+import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/user/app_mode_enum.dart';
@@ -190,8 +190,10 @@ class _SignInFormState extends BaseState<SignInForm> {
           hintText: translate('$_baseTranslate.user'),
           contentPadding:
               EdgeInsets.only(bottom: 10, top: 10, left: 15, right: 15),
-          enabledBorder: InputHelper.enableBorder(context, widget.appMode),
-          focusedBorder: InputHelper.focusedBorder(context),
+          enabledBorder: ThemeHelper.enableBorder(context, widget.appMode),
+          focusedBorder: ThemeHelper.focusedBorder(context),
+          errorBorder: ThemeHelper.errorBorder(context),
+          focusedErrorBorder: ThemeHelper.errorBorder(context),
         ),
       ),
     );
@@ -239,8 +241,10 @@ class _SignInFormState extends BaseState<SignInForm> {
           hintText: translate('$_baseTranslate.password'),
           contentPadding:
               EdgeInsets.only(bottom: 10, top: 10, left: 15, right: 15),
-          enabledBorder: InputHelper.enableBorder(context, widget.appMode),
-          focusedBorder: InputHelper.focusedBorder(context),
+          enabledBorder: ThemeHelper.enableBorder(context, widget.appMode),
+          focusedBorder: ThemeHelper.focusedBorder(context),
+          errorBorder: ThemeHelper.errorBorder(context),
+          focusedErrorBorder: ThemeHelper.errorBorder(context),
         ),
       ),
     );

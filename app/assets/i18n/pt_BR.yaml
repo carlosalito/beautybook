@@ -1,5 +1,11 @@
 common:
   loading: Carregando
+  now: Agora mesmo
+  minutes: minutos atrás
+  hours: horas atrás
+  yesterday: ontem
+  outputFormat: dd/MM/yyyy HH:mm
+
 signin:
   skip: Pular
   signUp: Registre-se
@@ -7,6 +13,8 @@ signin:
   user: E-mail
   password: Senha
   enter: Entrar
+  userError: Usuário ou senha inválidos
+  genericError: Erro ao realizar login
 signUp:
   create: Criando novo usuário
   name: Nome
@@ -25,3 +33,29 @@ validators:
   emptyName: Informe seu nome
   emptyPassword: Informe senha de 6 dígitos
   invalidPassword: Senha inválida
+  emptyTitle: Informe um título
+  emptyPost: Escreva algo para salvar
+  largePost: Posts devem conter no máximo 280 caracteres
+navigator:
+  profileHint: Perfil
+  noLogged: Login
+timeline:
+  listError: Erro ao lista posts.
+  endList: Fim das postagens...
+  more: Ver mais
+  less: Ver menos    
+post:
+  new: Criar uma nova postagem...
+  title: Postagem
+  error: Erro ao salvar post.
+  errorGalery: Erro ao atualizar imagens do Post
+  newPost: Nova postagem,
+  newPosts: Novas postagens,      
+  form: 
+    title: Título,
+    body: Sua postagem fantástica...
+  delete:
+    confirm: Apagar
+    cancel: Cancelar
+    error: Erro ao deletar postagem
+

@@ -24,21 +24,6 @@ mixin _$SignUpController on _SignUpControllerBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_SignUpControllerBase.error');
-
-  @override
-  String get error {
-    _$errorAtom.reportRead();
-    return super.error;
-  }
-
-  @override
-  set error(String value) {
-    _$errorAtom.reportWrite(value, super.error, () {
-      super.error = value;
-    });
-  }
-
   final _$formKeyAtom = Atom(name: '_SignUpControllerBase.formKey');
 
   @override
@@ -176,7 +161,6 @@ mixin _$SignUpController on _SignUpControllerBase, Store {
   String toString() {
     return '''
 loading: ${loading},
-error: ${error},
 formKey: ${formKey},
 nameController: ${nameController},
 emailController: ${emailController},

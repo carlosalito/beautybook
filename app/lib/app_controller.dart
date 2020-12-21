@@ -42,7 +42,6 @@ abstract class _AppControllerBase with Store {
   void setTheme(AppMode value) {
     appMode = value ?? AppMode.light;
     if (value == AppMode.dark) theme = darkTheme;
-    signOut();
   }
 
   @action
@@ -63,7 +62,6 @@ abstract class _AppControllerBase with Store {
   Future<void> changeLanguage(BuildContext context, Language value) async {
     await FlutterI18n.refresh(context, I18nHelper.getLocale(value));
     language = value;
-    // fallbackFile = I18nHelper.getFalbackFile(value);
   }
 
   @action

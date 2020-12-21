@@ -2,6 +2,7 @@ import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
+import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/screens/sign/signin.controller.dart';
@@ -124,13 +125,7 @@ class _SignInScreenState extends BaseState<SignInScreen>
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   boxShadow: [
                     initializedContainer
-                        ? BoxShadow(
-                            color: Theme.of(context)
-                                .primaryColorDark
-                                .withOpacity(.5),
-                            blurRadius: 15.0,
-                            spreadRadius: -5.0,
-                            offset: Offset(0.0, 5.0))
+                        ? ThemeHelper.boxCard(context)
                         : BoxShadow()
                   ]),
               child: initializedContainer

@@ -40,9 +40,6 @@ abstract class _SignUpControllerBase with Store {
   bool loading = false;
 
   @observable
-  String error;
-
-  @observable
   var formKey = GlobalKey<FormState>();
 
   @observable
@@ -79,7 +76,7 @@ abstract class _SignUpControllerBase with Store {
     final Uri _uri = Uri.file(picture);
     final File _file = File.fromUri(_uri);
 
-    return UtilsServices.uploadFileAndGetUrl(path, _file);
+    return UtilsServices.uploadFile(path, _file);
   }
 
   @action

@@ -130,7 +130,7 @@ class FirebaseAuthenticationService extends AuthService {
       await Directory(path).create(recursive: true);
       File file = new File(fileName);
       file.writeAsBytesSync(response.bodyBytes);
-      return Future.value(UtilsServices.uploadFileAndGetUrl(dest, file));
+      return Future.value(UtilsServices.uploadFile(dest, file));
     } catch (e) {
       throw Exception(e.toString());
     }
