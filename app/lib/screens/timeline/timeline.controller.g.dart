@@ -130,6 +130,21 @@ mixin _$TimelineController on _TimelineControllerBase, Store {
     });
   }
 
+  final _$bottomSpinAtom = Atom(name: '_TimelineControllerBase.bottomSpin');
+
+  @override
+  bool get bottomSpin {
+    _$bottomSpinAtom.reportRead();
+    return super.bottomSpin;
+  }
+
+  @override
+  set bottomSpin(bool value) {
+    _$bottomSpinAtom.reportWrite(value, super.bottomSpin, () {
+      super.bottomSpin = value;
+    });
+  }
+
   final _$formKeyAtom = Atom(name: '_TimelineControllerBase.formKey');
 
   @override
@@ -211,15 +226,32 @@ mixin _$TimelineController on _TimelineControllerBase, Store {
   final _$listAsyncAction = AsyncAction('_TimelineControllerBase.list');
 
   @override
-  Future<void> list(BuildContext context) {
-    return _$listAsyncAction.run(() => super.list(context));
+  Future<void> list(BuildContext context, {dynamic reset = false}) {
+    return _$listAsyncAction.run(() => super.list(context, reset: reset));
+  }
+
+  final _$refreshPostsAsyncAction =
+      AsyncAction('_TimelineControllerBase.refreshPosts');
+
+  @override
+  Future<void> refreshPosts(BuildContext context, {dynamic setRefresh = true}) {
+    return _$refreshPostsAsyncAction
+        .run(() => super.refreshPosts(context, setRefresh: setRefresh));
+  }
+
+  final _$getMorePostsAsyncAction =
+      AsyncAction('_TimelineControllerBase.getMorePosts');
+
+  @override
+  Future<void> getMorePosts(BuildContext context) {
+    return _$getMorePostsAsyncAction.run(() => super.getMorePosts(context));
   }
 
   final _$savePostAsyncAction = AsyncAction('_TimelineControllerBase.savePost');
 
   @override
-  Future savePost(BuildContext context) {
-    return _$savePostAsyncAction.run(() => super.savePost(context));
+  Future savePost(BuildContext context, String uid) {
+    return _$savePostAsyncAction.run(() => super.savePost(context, uid));
   }
 
   final _$updateGaleryAsyncAction =
@@ -303,11 +335,33 @@ mixin _$TimelineController on _TimelineControllerBase, Store {
   }
 
   @override
+  void setBottomSpin(bool value) {
+    final _$actionInfo = _$_TimelineControllerBaseActionController.startAction(
+        name: '_TimelineControllerBase.setBottomSpin');
+    try {
+      return super.setBottomSpin(value);
+    } finally {
+      _$_TimelineControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setProgress(double value) {
     final _$actionInfo = _$_TimelineControllerBaseActionController.startAction(
         name: '_TimelineControllerBase.setProgress');
     try {
       return super.setProgress(value);
+    } finally {
+      _$_TimelineControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setPage(int value) {
+    final _$actionInfo = _$_TimelineControllerBaseActionController.startAction(
+        name: '_TimelineControllerBase.setPage');
+    try {
+      return super.setPage(value);
     } finally {
       _$_TimelineControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -347,22 +401,22 @@ mixin _$TimelineController on _TimelineControllerBase, Store {
   }
 
   @override
-  dynamic formPost(int index, PostModel post) {
+  dynamic formPost(PostModel post) {
     final _$actionInfo = _$_TimelineControllerBaseActionController.startAction(
         name: '_TimelineControllerBase.formPost');
     try {
-      return super.formPost(index, post);
+      return super.formPost(post);
     } finally {
       _$_TimelineControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic refreshPosts(BuildContext context) {
+  dynamic postDetail(PostModel post) {
     final _$actionInfo = _$_TimelineControllerBaseActionController.startAction(
-        name: '_TimelineControllerBase.refreshPosts');
+        name: '_TimelineControllerBase.postDetail');
     try {
-      return super.refreshPosts(context);
+      return super.postDetail(post);
     } finally {
       _$_TimelineControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -401,6 +455,7 @@ indexPictureShow: ${indexPictureShow},
 loading: ${loading},
 refreshing: ${refreshing},
 deleting: ${deleting},
+bottomSpin: ${bottomSpin},
 formKey: ${formKey},
 titleController: ${titleController},
 postController: ${postController},

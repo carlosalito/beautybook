@@ -7,4 +7,6 @@ class Endpoints {
   static String listPosts = '$baseUrl/timeline/list/';
   static String post = '$baseUrl/timeline';
   static String updateGalery = '$baseUrl/timeline/updateGalery/';
+  static String boticarioNews =
+      'https://gb-mobile-app-teste.s3.amazonaws.com/data.json';
 }

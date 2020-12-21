@@ -1,4 +1,3 @@
-import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
@@ -33,10 +32,10 @@ class TimelineBody extends StatelessWidget {
     });
   }
 
-  Widget _resolveLoading() {
-    return controller.loading && !controller.refreshing
+  _resolveLoading() {
+    return controller.bottomSpin
         ? Container(
-            margin: EdgeInsets.only(bottom: Constants.padding),
+            margin: const EdgeInsets.only(bottom: 10.0),
             child: CircularProgressIndicator(),
           )
         : Container();

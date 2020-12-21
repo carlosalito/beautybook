@@ -53,6 +53,9 @@ abstract class _TimelineControllerBase with Store {
   bool deleting = false;
 
   @observable
+  bool bottomSpin = false;
+
+  @observable
   var formKey = GlobalKey<FormState>();
 
   @observable
@@ -89,8 +92,18 @@ abstract class _TimelineControllerBase with Store {
   }
 
   @action
+  void setBottomSpin(bool value) {
+    bottomSpin = value;
+  }
+
+  @action
   void setProgress(double value) {
     uploadProgress = value;
+  }
+
+  @action
+  void setPage(int value) {
+    page = value;
   }
 
   @action
@@ -102,7 +115,7 @@ abstract class _TimelineControllerBase with Store {
     final List<String> _pictures = [];
 
     if (pictures.length > 0) {
-      setProgress(0.0);
+      setProgress(null);
 
       for (var i = 0; i < pictures.length; i++) {
         final String pic = pictures[i];
@@ -115,8 +128,11 @@ abstract class _TimelineControllerBase with Store {
           final File file = File.fromUri(uri);
 
           final _task = UtilsServices.uploadFile(url, file);
-          _task
-              .whenComplete(() => setProgress(100 / pictures.length * (i + 1)));
+          await _task.whenComplete(() {
+            final _progress = (1 / pictures.length) * (i + 1);
+            print('progress ${_progress.toString()}');
+            setProgress(_progress);
+          });
           _pictures.add(await UtilsServices.getFireUrl(url));
         }
       }
@@ -135,19 +151,28 @@ abstract class _TimelineControllerBase with Store {
   }
 
   @action
-  formPost(int index, PostModel post) {
-    final _post = post != null ? post : PostModel(title: '', body: '');
-    initGalery();
-    ExtendedNavigator.root.push(Routes.postScreen,
-        arguments: PostScreenArguments(index: index, post: _post));
+  formPost(PostModel post) {
+    final _post =
+        post != null ? post : PostModel(title: '', body: '', uid: null);
+    if (post == null) initGalery();
+    ExtendedNavigator.root
+        .push(Routes.postScreen, arguments: PostScreenArguments(post: _post));
   }
 
   @action
-  Future<void> list(BuildContext context) async {
+  postDetail(PostModel post) {
+    ExtendedNavigator.root.push(Routes.postDetailsScreen,
+        arguments: PostDetailsScreenArguments(post: post));
+  }
+
+  @action
+  Future<void> list(BuildContext context, {reset = false}) async {
     try {
       setLoading(true);
       final _result = await repository.list(page);
       pageInfo = _result['pageInfo'];
+
+      if (reset) postList = [];
       postList = [...postList, ..._result['data']];
       setLoading(false);
     } catch (e) {
@@ -160,23 +185,36 @@ abstract class _TimelineControllerBase with Store {
   }
 
   @action
-  refreshPosts(BuildContext context) {
+  Future<void> refreshPosts(BuildContext context, {setRefresh = true}) async {
+    setRefreshing(setRefresh);
     page = 0;
-    postList = [];
     pageInfo = PageInfoModel(totalPages: 0, totalRows: 0);
-    list(context);
+    await list(context, reset: true);
+    setRefreshing(false);
+  }
+
+  @action
+  Future<void> getMorePosts(BuildContext context) async {
+    if (page < pageInfo.totalPages - 1) {
+      setPage(page + 1);
+      setBottomSpin(true);
+      await list(context);
+      setBottomSpin(false);
+    }
   }
 
   @action
   savePost(
     BuildContext context,
+    String uid,
   ) async {
     try {
       FocusScope.of(context).requestFocus(FocusNode());
+      FocusScope.of(context).unfocus();
 
       if (formKey.currentState.validate() && !loading) {
         setLoading(true);
-        final _uid = UtilsServices.uId();
+        final _uid = uid != null ? uid : UtilsServices.uId();
         final List<String> _pictures = await _resolvePictures(_uid);
         setProgress(null);
 
@@ -188,7 +226,7 @@ abstract class _TimelineControllerBase with Store {
         );
 
         await repository.create(_post);
-        refreshPosts(context);
+        refreshPosts(context, setRefresh: false);
         ExtendedNavigator.root.pop();
       }
     } catch (e) {
@@ -264,7 +302,10 @@ abstract class _TimelineControllerBase with Store {
   }
 
   @action
-  Future<void> editPost(PostModel post) async {}
+  Future<void> editPost(PostModel post) async {
+    pictures = post.pictures;
+    formPost(post);
+  }
 
   @action
   Future<void> deletePost(BuildContext context, PostModel post) async {
@@ -272,7 +313,7 @@ abstract class _TimelineControllerBase with Store {
       setDeleteState(true);
       await repository.delete(post.uid);
       setDeleteState(false);
-      refreshPosts(context);
+      refreshPosts(context, setRefresh: false);
     } catch (e) {
       setDeleteState(false);
       Notifications.error(

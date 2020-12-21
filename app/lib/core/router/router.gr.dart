@@ -12,6 +12,7 @@ import '../../screens/navigator/navigator.dart';
 import '../../screens/sign/signin.dart';
 import '../../screens/sign/signup.dart';
 import '../../screens/splash/splash.dart';
+import '../../screens/timeline/post_details_screen.dart';
 import '../../screens/timeline/post_screen.dart';
 import '../models/post/post_model.dart';
 
@@ -21,12 +22,14 @@ class Routes {
   static const String signUpScreen = '/signUp';
   static const String navigatorScreen = '/home';
   static const String postScreen = '/post';
+  static const String postDetailsScreen = '/post-etail';
   static const all = <String>{
     splashScreen,
     signInScreen,
     signUpScreen,
     navigatorScreen,
     postScreen,
+    postDetailsScreen,
   };
 }
 
@@ -39,6 +42,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.signUpScreen, page: SignUpScreen),
     RouteDef(Routes.navigatorScreen, page: NavigatorScreen),
     RouteDef(Routes.postScreen, page: PostScreen),
+    RouteDef(Routes.postDetailsScreen, page: PostDetailsScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -72,10 +76,16 @@ class AppRouter extends RouterBase {
         orElse: () => PostScreenArguments(),
       );
       return buildAdaptivePageRoute<PostScreen>(
-        builder: (context) => PostScreen(
-          post: args.post,
-          index: args.index,
-        ),
+        builder: (context) => PostScreen(post: args.post),
+        settings: data,
+      );
+    },
+    PostDetailsScreen: (data) {
+      final args = data.getArgs<PostDetailsScreenArguments>(
+        orElse: () => PostDetailsScreenArguments(),
+      );
+      return buildAdaptivePageRoute<PostDetailsScreen>(
+        builder: (context) => PostDetailsScreen(post: args.post),
         settings: data,
       );
     },
@@ -89,6 +99,11 @@ class AppRouter extends RouterBase {
 /// PostScreen arguments holder class
 class PostScreenArguments {
   final PostModel post;
-  final int index;
-  PostScreenArguments({this.post, this.index});
+  PostScreenArguments({this.post});
+}
+
+/// PostDetailsScreen arguments holder class
+class PostDetailsScreenArguments {
+  final PostModel post;
+  PostDetailsScreenArguments({this.post});
 }

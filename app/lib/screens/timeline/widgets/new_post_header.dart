@@ -34,7 +34,7 @@ class NewPostHeader extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5)),
           child: InkWell(
             onTap: () {
-              controller.formPost(null, null);
+              controller.formPost(null);
             },
             child: Padding(
               padding: EdgeInsets.all(10),

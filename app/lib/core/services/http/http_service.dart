@@ -106,6 +106,7 @@ class CommonHttp {
   static Future<http.Response> apiGet(
     String url, {
     bool public,
+    bool injectToken = true,
   }) async {
     final token = await _getToken(public);
 
@@ -116,6 +117,10 @@ class CommonHttp {
       "Authorization": "Bearer $token",
       "UserUid": user?.uid ?? '',
     };
+
+    if (!injectToken)
+      _headers.removeWhere(
+          (key, value) => key == "Authorization" || key == "UserUid");
 
     final http.Response response = await http.get(url, headers: _headers);
     return response;

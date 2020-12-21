@@ -17,8 +17,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 class PostScreen extends StatefulWidget {
   final PostModel post;
-  final int index;
-  PostScreen({this.post, this.index});
+  PostScreen({this.post});
   @override
   _PostScreenState createState() => _PostScreenState();
 }
@@ -231,7 +230,7 @@ class _PostScreenState extends BaseState<PostScreen> {
       child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () => controller.savePost(context),
+            onTap: () => controller.savePost(context, widget.post.uid),
             child: Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: Constants.doublePadding),

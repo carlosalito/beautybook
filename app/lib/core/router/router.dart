@@ -3,6 +3,7 @@ import 'package:beautybook/screens/navigator/navigator.dart';
 import 'package:beautybook/screens/sign/signin.dart';
 import 'package:beautybook/screens/sign/signup.dart';
 import 'package:beautybook/screens/splash/splash.dart';
+import 'package:beautybook/screens/timeline/post_details_screen.dart';
 import 'package:beautybook/screens/timeline/post_screen.dart';
 
 @MaterialAutoRouter(routes: <AutoRoute>[
@@ -11,7 +12,8 @@ import 'package:beautybook/screens/timeline/post_screen.dart';
   AdaptiveRoute<SignUpScreen>(page: SignUpScreen, path: '/signUp'),
   AdaptiveRoute<NavigatorScreen>(page: NavigatorScreen, path: '/home'),
   AdaptiveRoute<PostScreen>(page: PostScreen, path: '/post'),
-  // AdaptiveRoute<ImageView>(page: ImageView, path: '/image-view'),
+  AdaptiveRoute<PostDetailsScreen>(
+      page: PostDetailsScreen, path: '/post-etail'),
 ])
 class $AppRouter {
   SplashScreen initialPage;
@@ -19,5 +21,5 @@ class $AppRouter {
   SignUpScreen signUpScreen;
   NavigatorScreen navigatorScreen;
   PostScreen postScreen;
-  // ImageView imageView;
+  PostDetailsScreen postDetailsScreen;
 }

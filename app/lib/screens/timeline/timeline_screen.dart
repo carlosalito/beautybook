@@ -1,4 +1,5 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
@@ -28,9 +29,10 @@ class _TimelineScreenState extends BaseState<TimelineScreen> {
     super.initState();
     controllerList.addListener(_scrollListener);
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await controller.list(context);
-
-      if (appController.user != null) controller.manageNewPosts();
+      if (controller.postList.length == 0) {
+        await controller.list(context);
+        if (appController.user != null) controller.manageNewPosts();
+      }
     });
   }
 
@@ -46,6 +48,7 @@ class _TimelineScreenState extends BaseState<TimelineScreen> {
             backgroundColor: Theme.of(context).backgroundColor,
             child: Stack(
               children: <Widget>[
+                _loadingTimeline(),
                 ListView(
                   controller: controllerList,
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -65,6 +68,15 @@ class _TimelineScreenState extends BaseState<TimelineScreen> {
         ),
       );
     });
+  }
+
+  Widget _loadingTimeline() {
+    return controller.loading && !controller.refreshing
+        ? Container(
+            padding: EdgeInsets.only(bottom: Constants.padding),
+            child: LinearProgressIndicator(),
+          )
+        : Container();
   }
 
   Widget _newPostsWidget() {
@@ -114,8 +126,7 @@ class _TimelineScreenState extends BaseState<TimelineScreen> {
   _scrollListener() {
     if (controllerList.offset >= controllerList.position.maxScrollExtent &&
         !controllerList.position.outOfRange) {
-      print('bottom');
-      // controller.getMorePosts();
+      controller.getMorePosts(context);
     }
   }
 }

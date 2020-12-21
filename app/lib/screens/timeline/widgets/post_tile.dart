@@ -2,14 +2,13 @@ import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
-import 'package:beautybook/core/helpers/string/string_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/post/post_model.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
 import 'package:beautybook/screens/timeline/widgets/delete_modal.dart';
 import 'package:beautybook/screens/timeline/widgets/images_tile.dart';
-import 'package:beautybook/shared_widgets/circular_avatar/circular_avatar.dart';
+import 'package:beautybook/screens/timeline/widgets/post_tile_header.dart';
 import 'package:beautybook/shared_widgets/expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +25,7 @@ class PostTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // Navigator.of(context).push(CupertinoPageRoute(
-        //     builder: (context) => PostDetailsScreen(post: widget.post)));
-      },
+      onTap: () => controller.postDetail(post),
       child: Container(
         alignment: Alignment.topLeft,
         margin: EdgeInsets.only(bottom: 10),
@@ -118,61 +114,11 @@ class PostTile extends StatelessWidget {
   }
 
   Widget _postHeader(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          CircularAvatar(
-            size: 35,
-            picture: post.userPicture,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 7),
-                child: Text(
-                  post.userName,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 7),
-                child: Text(
-                  StringHelper.friendlyDate(context, post.createdAt),
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .textColor(appController.appMode),
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
+    return PostTileHeader(
+      appMode: appController.appMode,
+      post: post,
     );
   }
-
-  // _edit(TimelineService timelineService) {
-  //   timelineService.timelineProvider.setGalery(widget.post.pictures);
-  //   Navigator.of(context).push(CupertinoPageRoute(
-  //       builder: (context) =>
-  //           PostScreen(post: widget.post, index: widget.index)));
-  // }
-
-  // bool _canEdit() {
-  //   UtilsService utils = UtilsService();
-  //   final UserModel user = utils.getValueInBox(Storage.user);
-  //   if (user != null && user.uid == widget.post.userUid) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   void _deletePost(BuildContext context) {
     showModalBottomSheet(
