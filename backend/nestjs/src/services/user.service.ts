@@ -249,7 +249,7 @@ export class UserService {
 
         const result = response.body as SearchResponse<UserModel>;
         let userPicture = null;
-        let user = null;
+        let user: UserModel = null;
 
         if (result.hits.total.value === 0) {
           const userAuth = await this.fireAuth.getUser(userUid);
@@ -262,6 +262,8 @@ export class UserService {
 
         if (user.picture && !userPicture) {
           user.picture = await this.service.getFireUrl(`${STORAGE.user}${user.picture}`);
+          if (user.updatedPictureAt)
+            user.picture = user.picture + '&decache=user.updatedPictureAt';
         } else {
           if (userPicture) {
             user.picture = userPicture;
