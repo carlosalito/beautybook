@@ -13,6 +13,7 @@ import '../repositories/api/api_timeline_repository.dart';
 import '../repositories/api/api_user_repository.dart';
 import '../../app_controller.dart';
 import '../services/auth/auth_service.dart';
+import '../../screens/boticario-news/boticario_news.controller.dart';
 import '../services/firebase/firebase_auth_service.dart';
 import '../../screens/navigator/navigator.controller.dart';
 import '../../screens/sign/signin.controller.dart';
@@ -31,6 +32,8 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<ApiBoticarioNewsRepository>(() => ApiBoticarioNewsRepository());
+  gh.factory<BoticarioNewsController>(() =>
+      BoticarioNewsController(repository: get<ApiBoticarioNewsRepository>()));
   gh.factory<NavigatorController>(() => NavigatorController());
   gh.factory<TimelineRepository>(() => ApiTimelineRepository());
   gh.factory<UserRepository>(() => ApiUserRepository());

@@ -58,4 +58,6 @@ post:
     confirm: Apagar
     cancel: Cancelar
     error: Erro ao deletar postagem
+boticarioNews:
+  error: Erro ao listar novidas Boticário
 

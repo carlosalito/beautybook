@@ -4,6 +4,7 @@ import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/user/app_mode_enum.dart';
+import 'package:beautybook/screens/boticario-news/boticario_news_screen.dart';
 import 'package:beautybook/screens/navigator/navigator.controller.dart';
 import 'package:beautybook/screens/navigator/widgets/header.dart';
 import 'package:beautybook/screens/timeline/timeline_screen.dart';
@@ -29,7 +30,7 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       TimelineScreen(),
-      Container(),
+      BoticarioNews(),
       Container(),
     ];
 
