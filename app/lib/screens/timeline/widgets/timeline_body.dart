@@ -46,7 +46,7 @@ class TimelineBody extends StatelessWidget {
       return Container(
           child: Text(
         I18nHelper.translate(context, 'timeline.endList'),
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.normal),
       ));
     }
     return Container();
