@@ -263,7 +263,7 @@ export class UserService {
         if (user.picture && !userPicture) {
           user.picture = await this.service.getFireUrl(`${STORAGE.user}${user.picture}`);
           if (user.updatedPictureAt)
-            user.picture = user.picture + '&decache=user.updatedPictureAt';
+            user.picture = user.picture + '&decache=' + user.updatedPictureAt;
         } else {
           if (userPicture) {
             user.picture = userPicture;
