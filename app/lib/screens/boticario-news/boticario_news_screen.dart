@@ -6,6 +6,7 @@ import 'package:beautybook/core/helpers/string/string_helper.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/boticario-news/boticario-news_model.dart';
 import 'package:beautybook/screens/boticario-news/boticario_news.controller.dart';
+import 'package:beautybook/shared_widgets/circular_avatar/circular_avatar.dart';
 import 'package:beautybook/shared_widgets/expandable_text/expandable_text.dart';
 import 'package:beautybook/shared_widgets/show_animations/background_unfocus/background_unfocus.dart';
 import 'package:flutter/material.dart';
@@ -85,21 +86,30 @@ class _BoticarioNewsState extends State<BoticarioNews> {
   }
 
   Widget _newsHeader(BoticarioNewsModel news) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
-        Text(
-          news.user.name,
-          style: TextStyle(fontWeight: FontWeight.bold),
+        CircularAvatar(
+          size: 35,
+          picture: news.user.profilePicture,
         ),
-        Text(
-          StringHelper.friendlyDate(context, news.message.createdAt),
-          style: TextStyle(
-            fontSize: 12,
-            fontStyle: FontStyle.italic,
-            color:
-                Theme.of(context).colorScheme.textColor(appController.appMode),
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              news.user.name,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              StringHelper.friendlyDate(context, news.message.createdAt),
+              style: TextStyle(
+                fontSize: 12,
+                fontStyle: FontStyle.italic,
+                color: Theme.of(context)
+                    .colorScheme
+                    .textColor(appController.appMode),
+              ),
+            ),
+          ],
         ),
       ],
     );

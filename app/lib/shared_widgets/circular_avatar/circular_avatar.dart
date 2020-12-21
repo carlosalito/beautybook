@@ -21,12 +21,16 @@ class CircularAvatar extends StatelessWidget {
             ? Container(
                 height: size,
                 width: size,
-                decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: new DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(picture),
-                    )))
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(size),
+                  child: CachedNetworkImage(
+                    imageUrl: picture,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        Icon(BeautybookIcons.iconUser),
+                  ),
+                ),
+              )
             : picture.startsWith('/')
                 ? Container(
                     height: size,

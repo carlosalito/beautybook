@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 class StringHelper {
   static String initialLetters(String name) {
+    if (name == null) return '';
     final _arrayName = name.split(' ');
     String _initial = _arrayName[0].substring(0, 1);
     if (_arrayName[1] != null) {
