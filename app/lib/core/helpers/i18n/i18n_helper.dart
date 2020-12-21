@@ -1,4 +1,5 @@
 import 'package:beautybook/core/constants/globals.dart';
+import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
@@ -26,7 +27,9 @@ class I18nHelper {
     return language == Language.english ? 'en_US' : 'pt_BR';
   }
 
-  static String getFlagLanguage(Language language) {
-    return language == Language.english ? 'en' : 'pt';
+  static IconData getFlagLanguage(Language language) {
+    return language == Language.english
+        ? BeautybookIcons.en_US
+        : BeautybookIcons.pt_Br;
   }
 }

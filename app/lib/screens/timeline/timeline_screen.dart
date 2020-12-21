@@ -97,10 +97,11 @@ class _TimelineScreenState extends BaseState<TimelineScreen> {
                     width: 150,
                     height: 35,
                     alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: Constants.padding),
                     padding: EdgeInsets.all(7),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
+                      borderRadius:
+                          BorderRadius.circular(Constants.borderRadius),
                       color: Theme.of(context).primaryColor,
                     ),
                     child: Text(

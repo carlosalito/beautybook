@@ -21,21 +21,6 @@ class ApiTimelineRepository extends ApiBaseRepository<PostModel>
   }
 
   @override
-  Future<PostModel> findById({String id}) async {
-    // try {
-    //   final _url = Endpoints.me.replaceAll('#id', id);
-    //   final result = await CommonHttp.apiGet(_url, public: false);
-    //   if (result.statusCode == 200) {
-    //     return UserModel.fromJson(jsonDecode(result.body));
-    //   } else {
-    //     throw Exception(result.body);
-    //   }
-    // } catch (e) {
-    //   throw Exception(e.toString());
-    // }
-  }
-
-  @override
   Future<void> create(PostModel post) async {
     try {
       final _result = await CommonHttp.apiPost(Endpoints.post, jsonEncode(post),
@@ -93,5 +78,10 @@ class ApiTimelineRepository extends ApiBaseRepository<PostModel>
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  @override
+  Future<PostModel> findById({String id}) {
+    throw UnimplementedError();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/string/string_helper.dart';
@@ -6,7 +7,6 @@ import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/post/post_model.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
 import 'package:beautybook/screens/timeline/widgets/picture_post_tile.dart';
 import 'package:beautybook/shared_widgets/base_state/base_state.dart';
@@ -117,10 +117,10 @@ class _PostScreenState extends BaseState<PostScreen> {
             height: 95,
             width: 95,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                border: Border.all(color: Theme.of(context).primaryColor)),
+                borderRadius: BorderRadius.circular(Constants.borderRadius),
+                border: Border.all(color: Theme.of(context).accentColor)),
             child: Icon(BeautybookIcons.iconCam,
-                size: 35, color: Theme.of(context).primaryColor)),
+                size: 35, color: Theme.of(context).accentColor)),
       ),
     );
   }
@@ -161,12 +161,12 @@ class _PostScreenState extends BaseState<PostScreen> {
       controller: controller.titleController,
       focusNode: _postTitleFocus,
       textInputAction: TextInputAction.next,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       onFieldSubmitted: (term) {
         _fieldFocusChange(context, _postTitleFocus, _postBodyFocus);
       },
       onTap: () => _requestFocus('title'),
       validator: (value) {
-        _requestFocus('title');
         return StringHelper.validateTitle(context, value);
       },
       keyboardType: TextInputType.emailAddress,
@@ -196,12 +196,12 @@ class _PostScreenState extends BaseState<PostScreen> {
       focusNode: _postBodyFocus,
       textInputAction: TextInputAction.newline,
       keyboardType: TextInputType.multiline,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLines: ((size.height - hOthers - hImages) / 20).floor(),
       onTap: () {
         FocusScope.of(context).requestFocus(_postBodyFocus);
       },
       validator: (value) {
-        FocusScope.of(context).requestFocus(_postBodyFocus);
         return StringHelper.validatePost(context, value);
       },
       decoration: InputDecoration(

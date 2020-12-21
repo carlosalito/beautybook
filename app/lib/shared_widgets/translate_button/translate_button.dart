@@ -9,25 +9,23 @@ class TranslateButton extends StatelessWidget {
 
   final Language language;
   final double size;
+  final Color iconColor;
   final Function callBack;
 
-  TranslateButton({this.language, this.size, this.callBack});
+  TranslateButton({this.language, this.size, this.callBack, this.iconColor});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          controller.changeLanguage(context, language);
-          callBack();
-        },
-        child: Container(
-            width: size,
-            height: size,
-            decoration: new BoxDecoration(
-                shape: BoxShape.rectangle,
-                image: new DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage(
-                        'assets/images/${I18nHelper.getFlagLanguage(language)}.png')))));
+      onTap: () {
+        controller.changeLanguage(context, language);
+        callBack();
+      },
+      child: Icon(
+        I18nHelper.getFlagLanguage(language),
+        size: size,
+        color: iconColor,
+      ),
+    );
   }
 }

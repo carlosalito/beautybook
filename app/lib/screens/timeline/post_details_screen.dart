@@ -1,10 +1,10 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
 import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/post/post_model.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
 import 'package:beautybook/screens/timeline/widgets/images_tile.dart';
 import 'package:beautybook/screens/timeline/widgets/post_tile_header.dart';

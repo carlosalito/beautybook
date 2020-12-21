@@ -18,24 +18,24 @@ final lightTheme = ThemeData(
 final darkTheme = ThemeData(
     fontFamily: 'Colfax',
     backgroundColor: Color(0xFF022b35),
-    primaryColor: Color(0xFF0fb7e2),
+    primaryColor: Color(0xFF111820),
     primaryColorDark: Colors.black,
-    accentColor: Color(0xFF008eb2),
+    accentColor: Color(0xFFE0E0E0),
     hintColor: Color(0xFFB8BBC6),
     errorColor: Colors.red[600],
     disabledColor: Colors.grey[300],
-    iconTheme: new IconThemeData(color: Colors.grey[300]),
+    iconTheme: new IconThemeData(color: Colors.white),
     textTheme: TextTheme(
       bodyText2: TextStyle(color: Colors.white),
       bodyText1: TextStyle(color: Colors.white),
       headline6: TextStyle(color: Colors.white),
     ),
     appBarTheme: AppBarTheme(
-        actionsIconTheme: IconThemeData(color: Color(0xFF008eb2)),
+        actionsIconTheme: IconThemeData(color: Colors.white),
         textTheme: TextTheme(
-            headline6: TextStyle(
-                color: Color(0xFF008eb2), fontWeight: FontWeight.w500)),
-        iconTheme: IconThemeData(color: Color(0xFF008eb2))));
+            headline6:
+                TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+        iconTheme: IconThemeData(color: Colors.white)));
 
 class Constants {
   static double padding = 10.0;

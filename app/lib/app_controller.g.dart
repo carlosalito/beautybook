@@ -69,21 +69,6 @@ mixin _$AppController on _AppControllerBase, Store {
     });
   }
 
-  final _$progressUploadAtom = Atom(name: '_AppControllerBase.progressUpload');
-
-  @override
-  double get progressUpload {
-    _$progressUploadAtom.reportRead();
-    return super.progressUpload;
-  }
-
-  @override
-  set progressUpload(double value) {
-    _$progressUploadAtom.reportWrite(value, super.progressUpload, () {
-      super.progressUpload = value;
-    });
-  }
-
   final _$loadCurrentUserAsyncAction =
       AsyncAction('_AppControllerBase.loadCurrentUser');
 
@@ -124,11 +109,22 @@ mixin _$AppController on _AppControllerBase, Store {
   }
 
   @override
-  void setProgressUpload(double value) {
+  void toggleAppMode() {
     final _$actionInfo = _$_AppControllerBaseActionController.startAction(
-        name: '_AppControllerBase.setProgressUpload');
+        name: '_AppControllerBase.toggleAppMode');
     try {
-      return super.setProgressUpload(value);
+      return super.toggleAppMode();
+    } finally {
+      _$_AppControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setUserPicture(String picture) {
+    final _$actionInfo = _$_AppControllerBaseActionController.startAction(
+        name: '_AppControllerBase.setUserPicture');
+    try {
+      return super.setUserPicture(picture);
     } finally {
       _$_AppControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -140,8 +136,7 @@ mixin _$AppController on _AppControllerBase, Store {
 user: ${user},
 theme: ${theme},
 appMode: ${appMode},
-language: ${language},
-progressUpload: ${progressUpload}
+language: ${language}
     ''';
   }
 }

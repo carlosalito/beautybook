@@ -1,5 +1,5 @@
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/extensions/theme.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';

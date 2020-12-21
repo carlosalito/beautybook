@@ -16,6 +16,7 @@ import '../services/auth/auth_service.dart';
 import '../../screens/boticario-news/boticario_news.controller.dart';
 import '../services/firebase/firebase_auth_service.dart';
 import '../../screens/navigator/navigator.controller.dart';
+import '../../screens/profile/profile.controller.dart';
 import '../../screens/sign/signin.controller.dart';
 import '../../screens/sign/signup.controller.dart';
 import '../../screens/timeline/timeline.controller.dart';
@@ -32,15 +33,16 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<ApiBoticarioNewsRepository>(() => ApiBoticarioNewsRepository());
-  gh.factory<BoticarioNewsController>(() =>
-      BoticarioNewsController(repository: get<ApiBoticarioNewsRepository>()));
-  gh.factory<NavigatorController>(() => NavigatorController());
   gh.factory<TimelineRepository>(() => ApiTimelineRepository());
   gh.factory<UserRepository>(() => ApiUserRepository());
   gh.factory<AuthService>(() =>
       FirebaseAuthenticationService(userRepository: get<UserRepository>()));
   gh.factory<AccountService>(() => AccountService(
       authService: get<AuthService>(), userRepository: get<UserRepository>()));
+  gh.factory<NavigatorController>(
+      () => NavigatorController(appController: get<AppController>()));
+  gh.factory<ProfileController>(() => ProfileController(
+      repository: get<UserRepository>(), appController: get<AppController>()));
   gh.factory<SignInController>(() => SignInController(
         appController: get<AppController>(),
         accountService: get<AccountService>(),
@@ -54,6 +56,8 @@ GetIt $initGetIt(
       ));
 
   // Eager singletons must be registered in the right order
+  gh.singleton<BoticarioNewsController>(
+      BoticarioNewsController(repository: get<ApiBoticarioNewsRepository>()));
   gh.singleton<AppController>(AppController(
       authService: get<AuthService>(), userRepository: get<UserRepository>()));
   gh.singleton<TimelineController>(TimelineController(

@@ -1,4 +1,6 @@
+import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/constants/theme.dart';
+import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
@@ -18,11 +20,13 @@ class DeleteModal extends StatefulWidget {
 
 class _DeleteModalState extends State<DeleteModal> {
   final controller = getIt<TimelineController>();
+  final appController = getIt<AppController>();
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return Container(
+        color: Theme.of(context).colorScheme.cardColor(appController.appMode),
         height: 90,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -50,9 +54,9 @@ class _DeleteModalState extends State<DeleteModal> {
                     Navigator.pop(context);
                   },
                   icon: BeautybookIcons.iconCancel,
-                  iconColor: Theme.of(context).primaryColor,
+                  iconColor: Theme.of(context).accentColor,
                   label: I18nHelper.translate(context, 'post.delete.cancel'),
-                  labelColor: Theme.of(context).primaryColor,
+                  labelColor: Theme.of(context).accentColor,
                 ),
               ],
             ),

@@ -1,10 +1,11 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/globals.dart';
+import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/string/string_helper.dart';
 import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/core/models/user/login_provider_enum.dart';
 import 'package:beautybook/screens/sign/signin.controller.dart';
 import 'package:beautybook/shared_widgets/base_state/base_state.dart';
@@ -78,7 +79,7 @@ class _SignInFormState extends BaseState<SignInForm> {
               color: Colors.transparent,
               textColor: Colors.white,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(Constants.borderRadius)),
               child: Icon(
                 BeautybookIcons.iconGoogle,
                 color:
@@ -90,14 +91,13 @@ class _SignInFormState extends BaseState<SignInForm> {
           Container(
             width: 60,
             child: FlatButton(
-              onPressed: () {
-                //TODO:  _socialLogin(userService, LoginProvider.facebook);
-              },
+              onPressed: () =>
+                  controller.socialLogin(context, LoginProvider.facebook),
               padding: EdgeInsets.all(0),
               color: Colors.transparent,
               textColor: Colors.white,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(Constants.borderRadius)),
               child: Icon(
                 BeautybookIcons.iconFacebook,
                 color:
@@ -126,7 +126,9 @@ class _SignInFormState extends BaseState<SignInForm> {
       delay: 750,
       child: FlatButton(
         onPressed: () => controller.signIn(context),
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context)
+            .colorScheme
+            .buttonBackgroundColor(appController.appMode),
         textColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Container(
@@ -173,6 +175,7 @@ class _SignInFormState extends BaseState<SignInForm> {
         controller: controller.emailController,
         focusNode: _userFocus,
         textInputAction: TextInputAction.next,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onTap: () => _requestFocus('user'),
         onFieldSubmitted: (term) {
           _fieldFocusChange(context, _userFocus, _passwordFocus);
@@ -209,6 +212,7 @@ class _SignInFormState extends BaseState<SignInForm> {
         controller: controller.passwordController,
         focusNode: _passwordFocus,
         textInputAction: TextInputAction.done,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         obscureText: obscureText,
         onTap: () => _requestFocus('password'),
         onFieldSubmitted: (term) {

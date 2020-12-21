@@ -16,7 +16,7 @@ class CircularAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return picture == null
         ? Icon(BeautybookIcons.iconProfile,
-            size: size * 0.9, color: Theme.of(context).primaryColor)
+            size: size * 0.9, color: Theme.of(context).accentColor)
         : picture.startsWith('https://')
             ? Container(
                 height: size,
@@ -46,7 +46,7 @@ class CircularAvatar extends StatelessWidget {
                     height: size,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).accentColor,
                       shape: BoxShape.circle,
                     ),
                     child: Text(

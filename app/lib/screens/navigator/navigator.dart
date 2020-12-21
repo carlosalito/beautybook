@@ -1,12 +1,13 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/screens/boticario-news/boticario_news_screen.dart';
 import 'package:beautybook/screens/navigator/navigator.controller.dart';
 import 'package:beautybook/screens/navigator/widgets/header.dart';
+import 'package:beautybook/screens/profile/profile.dart';
 import 'package:beautybook/screens/timeline/timeline_screen.dart';
 import 'package:beautybook/shared_widgets/base_state/base_state.dart';
 import 'package:beautybook/shared_widgets/circular_avatar/circular_avatar.dart';
@@ -31,7 +32,7 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
     List<Widget> pages = [
       TimelineScreen(),
       BoticarioNews(),
-      Container(),
+      ProfileScreen(),
     ];
 
     return Observer(builder: (context) {
@@ -46,7 +47,9 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
               Theme.of(context).colorScheme.cardColor(appController.appMode),
           title: NavigatorHeader(),
           actions: [
-            _profileAction(),
+            controller.selectedIndex == 2
+                ? _signOutAction(context)
+                : _profileAction(),
           ],
         ),
         body: SafeArea(
@@ -58,11 +61,19 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
         ),
         bottomNavigationBar: FFNavigationBar(
           theme: FFNavigationBarTheme(
-            barBackgroundColor: Colors.white,
-            selectedItemBorderColor: Theme.of(context).primaryColor,
-            selectedItemBackgroundColor: Theme.of(context).primaryColor,
+            barBackgroundColor: Theme.of(context)
+                .colorScheme
+                .navigatorBarColor(appController.appMode),
+            selectedItemBorderColor: Theme.of(context)
+                .colorScheme
+                .selectedItemColor(appController.appMode),
+            selectedItemBackgroundColor: Theme.of(context)
+                .colorScheme
+                .selectedItemColor(appController.appMode),
             selectedItemIconColor: Colors.white,
-            selectedItemLabelColor: Theme.of(context).primaryColorDark,
+            selectedItemLabelColor: Theme.of(context)
+                .colorScheme
+                .selectedItemLabelColor(appController.appMode),
             showSelectedItemShadow: true,
             barHeight: 65,
           ),
@@ -94,15 +105,7 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
         padding: EdgeInsets.only(right: Constants.padding * .5),
         child: FlatButton(
           padding: EdgeInsets.all(0),
-          onPressed: () {
-            // if (userServices.userProvider.user != null &&
-            //     userServices.userProvider.user.uid != '') {
-            //   Navigator.pushNamed(context, Routes.profile);
-            // } else {
-            //   Navigator.pushNamedAndRemoveUntil(
-            //       context, Routes.signin, (Route<dynamic> route) => false);
-            // }
-          },
+          onPressed: () => controller.profileAction(),
           color: Colors.transparent,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -126,22 +129,14 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
         ));
   }
 
-  Future<void> _signOut() async {
-    // try {
-    //   setState(() {
-    //     loading = true;
-    //   });
-    //   await appController.signOut();
-    //   ExtendedNavigator.root.popAndPush(Routes.signInScreen);
-    //   setState(() {
-    //     loading = true;
-    //   });
-    // } catch (e) {
-    //   Notifications.error(context: context, message: 'Erro ao realizar logout');
-    //   setState(() {
-    //     loading = true;
-    //   });
-    //   throw (e);
-    // }
+  Widget _signOutAction(BuildContext context) {
+    return FlatButton(
+      onPressed: () => controller.signOut(context),
+      child: Icon(
+        BeautybookIcons.iconLogOut,
+        size: 20,
+        color: Theme.of(context).iconTheme.color,
+      ),
+    );
   }
 }

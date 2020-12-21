@@ -5,6 +5,8 @@ class BeautybookIcons {
 
   static const _fontFamily = 'BeautybookIcons';
 
+  static const IconData en_US = IconData(0xe910, fontFamily: _fontFamily);
+  static const IconData pt_Br = IconData(0xe911, fontFamily: _fontFamily);
   static const IconData boticario = IconData(0xe900, fontFamily: _fontFamily);
   static const IconData iconHome =
       const IconData(0xe901, fontFamily: _fontFamily);

@@ -1,6 +1,6 @@
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/constants/storage.dart';
 import 'package:beautybook/core/injectable/injectable.config.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/core/models/user/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
@@ -21,6 +21,7 @@ Future<void> configureDependencies() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(AppModeAdapter());
+  Hive.registerAdapter(LanguageAdapter());
   await Hive.openBox(Storage.mainBox);
 
   $initGetIt(getIt);

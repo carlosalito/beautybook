@@ -1,4 +1,4 @@
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:flutter/material.dart';
 
 final Color primaryBase = Color(0xFFB41EB3);
@@ -31,11 +31,33 @@ extension CustomColorScheme on ColorScheme {
   Color get textContrastColor => Colors.white;
 
   Color cardColor(AppMode mode) {
-    return mode == AppMode.dark ? const Color(0xFFDA1993) : Colors.white;
+    return mode == AppMode.dark ? const Color(0xFF111820) : Colors.white;
+  }
+
+  Color cardSignInColor(AppMode mode) {
+    return mode == AppMode.dark ? const Color(0xFF171f29) : Colors.white;
+  }
+
+  Color buttonBackgroundColor(AppMode mode) {
+    return mode == AppMode.dark
+        ? const Color(0xFF022b35)
+        : const Color(0xFFDA1993);
   }
 
   Color appBarColor(AppMode mode) {
     return mode == AppMode.dark ? const Color(0xFFDA1993) : Colors.grey[350];
+  }
+
+  Color navigatorBarColor(AppMode mode) {
+    return mode == AppMode.dark ? const Color(0xFF111820) : Colors.white;
+  }
+
+  Color selectedItemLabelColor(AppMode mode) {
+    return mode == AppMode.dark ? Colors.white : Colors.black;
+  }
+
+  Color selectedItemColor(AppMode mode) {
+    return mode == AppMode.dark ? Color(0xFF1a3d44) : Color(0xFFB41EB3);
   }
 
   Color get successColor => Colors.teal;

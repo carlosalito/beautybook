@@ -1,6 +1,7 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
+
 import 'package:flutter/material.dart';
 
 class NavigatorHeader extends StatelessWidget {
@@ -21,7 +22,7 @@ class NavigatorHeader extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(appController.appMode == AppMode.dark
-                        ? 'assets/images/logo_pb.png'
+                        ? 'assets/images/logo_bw.png'
                         : 'assets/images/logo.png'),
                     fit: BoxFit.contain),
               ),

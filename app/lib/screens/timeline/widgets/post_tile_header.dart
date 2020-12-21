@@ -1,7 +1,7 @@
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/string/string_helper.dart';
 import 'package:beautybook/core/models/post/post_model.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/shared_widgets/circular_avatar/circular_avatar.dart';
 import 'package:flutter/material.dart';
 

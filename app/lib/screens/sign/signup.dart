@@ -1,11 +1,11 @@
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/globals.dart';
 import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/string/string_helper.dart';
 import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/screens/sign/signup.controller.dart';
 import 'package:beautybook/shared_widgets/base_state/base_state.dart';
 import 'package:beautybook/shared_widgets/circular_avatar/circular_avatar.dart';
@@ -67,15 +67,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(Constants.borderRadius),
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Theme.of(context)
-                                .primaryColorDark
-                                .withOpacity(.5),
-                            blurRadius: 15.0,
-                            spreadRadius: -5.0,
-                            offset: Offset(0.0, 5.0))
-                      ]),
+                      boxShadow: [ThemeHelper.boxCard(context)]),
                   child: Column(
                     children: <Widget>[
                       _imagePicker(),
@@ -116,7 +108,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
       child: FlatButton(
         key: new Key('create'),
         onPressed: () => controller.createUser(context),
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).backgroundColor,
         textColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Container(
@@ -160,6 +152,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
         focusNode: _passwordFocus,
         textInputAction: TextInputAction.done,
         obscureText: obscureText,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onTap: () => _requestFocus('password'),
         onFieldSubmitted: (term) {
           controller.createUser(context);
@@ -217,6 +210,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
         controller: controller.nameController,
         focusNode: _nameFocus,
         textInputAction: TextInputAction.next,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onTap: () {
           FocusScope.of(context).requestFocus(_nameFocus);
         },
@@ -260,6 +254,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
         controller: controller.emailController,
         focusNode: _emailFocus,
         textInputAction: TextInputAction.next,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onTap: () => _requestFocus('email'),
         onFieldSubmitted: (term) {
           _fieldFocusChange(context, _emailFocus, _nameFocus);
@@ -316,8 +311,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
               width: 35,
               margin: EdgeInsets.only(left: 90, top: 20),
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).primaryColor),
+                  shape: BoxShape.circle, color: Theme.of(context).accentColor),
               child: Icon(BeautybookIcons.iconCam,
                   color: Theme.of(context).backgroundColor),
             ),

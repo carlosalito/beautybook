@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:beautybook/core/constants/globals.dart';
+import 'package:beautybook/core/constants/storage.dart';
 import 'package:beautybook/core/constants/theme.dart';
+import 'package:beautybook/core/helpers/hive/hive_helper.dart';
 import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/core/models/user/user_model.dart';
 import 'package:beautybook/core/repositories/user_repository.dart';
 import 'package:beautybook/core/services/auth/auth_service.dart';
@@ -35,13 +36,17 @@ abstract class _AppControllerBase with Store {
   @observable
   Language language = Language.portuguese;
 
-  @observable
-  double progressUpload = 0.0;
-
   @action
   void setTheme(AppMode value) {
     appMode = value ?? AppMode.light;
     if (value == AppMode.dark) theme = darkTheme;
+  }
+
+  @action
+  void toggleAppMode() {
+    appMode = appMode == AppMode.light ? AppMode.dark : AppMode.light;
+    theme = appMode == AppMode.light ? lightTheme : darkTheme;
+    HiveHelper.saveValueInBox(Storage.appMode, appMode);
   }
 
   @action
@@ -62,29 +67,14 @@ abstract class _AppControllerBase with Store {
   Future<void> changeLanguage(BuildContext context, Language value) async {
     await FlutterI18n.refresh(context, I18nHelper.getLocale(value));
     language = value;
+    HiveHelper.saveValueInBox(Storage.language, language);
   }
 
   @action
-  void setProgressUpload(double value) {
-    progressUpload = value;
+  void setUserPicture(String picture) {
+    final _user = user.toJson();
+    _user['picture'] = picture;
+    user = UserModel.fromJson(_user);
+    HiveHelper.saveValueInBox(Storage.user, user);
   }
-
-  // @action
-  // Future<void> updateUser(
-  //     {BuildContext context, String name, String email}) async {
-  //   bool changedEmail = false;
-  //   if (email != null) {
-  //     changedEmail = await changeEmail(context, email);
-  //   }
-
-  //   user = UserModel(
-  //       createdAt: user.createdAt,
-  //       updatedAt: DateTime.now(),
-  //       email: email != null && changedEmail ? email : user.email,
-  //       uid: user.uid,
-  //       name: name);
-
-  //   await userRepository.setDocument(document: user.toJson(), id: user.uid);
-  // }
-
 }

@@ -1,6 +1,7 @@
 import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/i18n/i18n_helper.dart';
+import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
@@ -22,13 +23,7 @@ class NewPostHeader extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             color:
                 Theme.of(context).colorScheme.cardColor(appController.appMode),
-            boxShadow: [
-              BoxShadow(
-                  color: Theme.of(context).primaryColorDark.withOpacity(.5),
-                  blurRadius: 15.0,
-                  spreadRadius: -5.0,
-                  offset: Offset(0.0, 5.0))
-            ]),
+            boxShadow: [ThemeHelper.boxCard(context)]),
         child: Material(
           color: Colors.transparent,
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -41,7 +36,7 @@ class NewPostHeader extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Icon(BeautybookIcons.iconNewPost,
-                      color: Theme.of(context).primaryColor),
+                      color: Theme.of(context).accentColor),
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(

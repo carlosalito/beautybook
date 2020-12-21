@@ -4,7 +4,6 @@ import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/extensions/theme.dart';
 import 'package:beautybook/core/helpers/theme/theme_helper.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
-import 'package:beautybook/core/models/user/app_mode_enum.dart';
 import 'package:beautybook/screens/sign/signin.controller.dart';
 import 'package:beautybook/screens/sign/widgets/sigin_form.dart';
 import 'package:beautybook/shared_widgets/base_state/base_state.dart';
@@ -121,7 +120,7 @@ class _SignInScreenState extends BaseState<SignInScreen>
               decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme
-                      .cardColor(appController.appMode),
+                      .cardSignInColor(appController.appMode),
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   boxShadow: [
                     initializedContainer
@@ -215,6 +214,7 @@ class _SignInScreenState extends BaseState<SignInScreen>
                 TranslateButton(
                   language: Language.portuguese,
                   size: 40,
+                  iconColor: Colors.white,
                   callBack: () {
                     setState(() {});
                   },
@@ -224,6 +224,7 @@ class _SignInScreenState extends BaseState<SignInScreen>
                 TranslateButton(
                   language: Language.english,
                   size: 40,
+                  iconColor: Colors.white,
                   callBack: () {
                     setState(() {});
                   },

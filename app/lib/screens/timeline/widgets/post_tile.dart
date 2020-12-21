@@ -31,9 +31,9 @@ class PostTile extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 10),
         padding: EdgeInsets.only(left: 5, right: 5, bottom: 10, top: 10),
         decoration: BoxDecoration(
-            color:
-                Theme.of(context).colorScheme.cardColor(appController.appMode),
-            borderRadius: BorderRadius.circular(7)),
+          color: Theme.of(context).colorScheme.cardColor(appController.appMode),
+          borderRadius: BorderRadius.circular(Constants.borderRadius),
+        ),
         child: Column(
           children: <Widget>[
             Row(
@@ -85,7 +85,7 @@ class PostTile extends StatelessWidget {
                   _actionButton(
                     context: context,
                     icon: BeautybookIcons.iconEdit,
-                    iconColor: Theme.of(context).primaryColor,
+                    iconColor: Theme.of(context).accentColor,
                     action: () => controller.editPost(post),
                   ),
                   SizedBox(width: Constants.doublePadding),

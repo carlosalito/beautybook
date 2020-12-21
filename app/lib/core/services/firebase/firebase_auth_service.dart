@@ -9,6 +9,7 @@ import 'package:beautybook/core/services/auth/auth_service.dart';
 import 'package:beautybook/core/services/utils/utils.services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' show Response, get;
 import 'package:injectable/injectable.dart';
@@ -108,6 +109,21 @@ class FirebaseAuthenticationService extends AuthService {
     return resultLogin;
   }
 
+  Future<UserCredential> _signInWithFacebook() async {
+    final FacebookLogin facebookLogin = FacebookLogin();
+    final FacebookLoginResult facebookSignInAccount =
+        await facebookLogin.logIn(['email']);
+
+    final AuthCredential credential = FacebookAuthProvider.credential(
+        facebookSignInAccount.accessToken.token);
+
+    final UserCredential resultLogin =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    await facebookLogin.logOut();
+    return resultLogin;
+  }
+
   Future<bool> _pictureExists(String ref) async {
     try {
       final String url =
@@ -143,7 +159,7 @@ class FirebaseAuthenticationService extends AuthService {
     if (provider == LoginProvider.google) {
       result = await _signInWithGoogle();
     } else {
-      // result = await _auth.signInWithFacebook();
+      result = await _signInWithFacebook();
     }
 
     final String storageUserPicRef =

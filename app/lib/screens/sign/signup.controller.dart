@@ -40,7 +40,7 @@ abstract class _SignUpControllerBase with Store {
   bool loading = false;
 
   @observable
-  var formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @observable
   TextEditingController nameController = TextEditingController();

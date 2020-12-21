@@ -25,21 +25,6 @@ mixin _$NavigatorController on _NavigatorControllerBase, Store {
     });
   }
 
-  final _$appBarTitleAtom = Atom(name: '_NavigatorControllerBase.appBarTitle');
-
-  @override
-  String get appBarTitle {
-    _$appBarTitleAtom.reportRead();
-    return super.appBarTitle;
-  }
-
-  @override
-  set appBarTitle(String value) {
-    _$appBarTitleAtom.reportWrite(value, super.appBarTitle, () {
-      super.appBarTitle = value;
-    });
-  }
-
   final _$selectedIndexAtom =
       Atom(name: '_NavigatorControllerBase.selectedIndex');
 
@@ -54,6 +39,13 @@ mixin _$NavigatorController on _NavigatorControllerBase, Store {
     _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
       super.selectedIndex = value;
     });
+  }
+
+  final _$signOutAsyncAction = AsyncAction('_NavigatorControllerBase.signOut');
+
+  @override
+  Future<void> signOut(BuildContext context) {
+    return _$signOutAsyncAction.run(() => super.signOut(context));
   }
 
   final _$_NavigatorControllerBaseActionController =
@@ -71,10 +63,20 @@ mixin _$NavigatorController on _NavigatorControllerBase, Store {
   }
 
   @override
+  void profileAction() {
+    final _$actionInfo = _$_NavigatorControllerBaseActionController.startAction(
+        name: '_NavigatorControllerBase.profileAction');
+    try {
+      return super.profileAction();
+    } finally {
+      _$_NavigatorControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 pageController: ${pageController},
-appBarTitle: ${appBarTitle},
 selectedIndex: ${selectedIndex}
     ''';
   }

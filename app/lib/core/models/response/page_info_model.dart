@@ -1,4 +1,3 @@
-import 'package:beautybook/core/models/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'page_info_model.g.dart';

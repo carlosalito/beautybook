@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/theme.dart';
 import 'package:beautybook/core/icons/beautybook_icons.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
@@ -26,7 +27,7 @@ class PicturePostTile extends StatelessWidget {
           height: 95,
           margin: EdgeInsets.only(left: 5),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(7),
+              borderRadius: BorderRadius.circular(Constants.borderRadius),
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: url.startsWith('https://')
