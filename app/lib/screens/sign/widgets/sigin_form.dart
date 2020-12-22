@@ -176,12 +176,10 @@ class _SignInFormState extends BaseState<SignInForm> {
         focusNode: _userFocus,
         textInputAction: TextInputAction.next,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        onTap: () => _requestFocus('user'),
         onFieldSubmitted: (term) {
           _fieldFocusChange(context, _userFocus, _passwordFocus);
         },
         validator: (value) {
-          FocusScope.of(context).requestFocus(_userFocus);
           return StringHelper.validateEmail(context, value);
         },
         keyboardType: TextInputType.emailAddress,
@@ -214,12 +212,10 @@ class _SignInFormState extends BaseState<SignInForm> {
         textInputAction: TextInputAction.done,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         obscureText: obscureText,
-        onTap: () => _requestFocus('password'),
         onFieldSubmitted: (term) {
           controller.signIn(context);
         },
         validator: (value) {
-          FocusScope.of(context).requestFocus(_passwordFocus);
           return StringHelper.validatePassword(context, value);
         },
         keyboardType: TextInputType.emailAddress,
@@ -252,14 +248,6 @@ class _SignInFormState extends BaseState<SignInForm> {
         ),
       ),
     );
-  }
-
-  void _requestFocus(String type) {
-    setState(() {
-      type == 'user'
-          ? FocusScope.of(context).requestFocus(_userFocus)
-          : FocusScope.of(context).requestFocus(_passwordFocus);
-    });
   }
 
   _fieldFocusChange(

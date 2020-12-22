@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:beautybook/app_controller.dart';
+import 'package:beautybook/core/constants/storage.dart';
 import 'package:beautybook/core/constants/theme.dart';
+import 'package:beautybook/core/helpers/hive/hive_helper.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/router/router.gr.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,6 +24,19 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       ExtendedNavigator.root.popAndPush(Routes.signInScreen);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _applyLanguage();
+    });
+  }
+
+  _applyLanguage() {
+    final language = HiveHelper.getValueInBox(Storage.language);
+    controller.changeLanguage(context, language);
   }
 
   @override

@@ -108,7 +108,7 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
       child: FlatButton(
         key: new Key('create'),
         onPressed: () => controller.createUser(context),
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).accentColor,
         textColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Container(
@@ -153,12 +153,10 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
         textInputAction: TextInputAction.done,
         obscureText: obscureText,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        onTap: () => _requestFocus('password'),
         onFieldSubmitted: (term) {
           controller.createUser(context);
         },
         validator: (value) {
-          FocusScope.of(context).requestFocus(_passwordFocus);
           return StringHelper.validatePassword(context, value);
         },
         keyboardType: TextInputType.emailAddress,
@@ -211,14 +209,10 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
         focusNode: _nameFocus,
         textInputAction: TextInputAction.next,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        onTap: () {
-          FocusScope.of(context).requestFocus(_nameFocus);
-        },
         onFieldSubmitted: (term) {
           _fieldFocusChange(context, _nameFocus, _passwordFocus);
         },
         validator: (value) {
-          FocusScope.of(context).requestFocus(_nameFocus);
           return StringHelper.validateName(context, value);
         },
         keyboardType: TextInputType.emailAddress,
@@ -255,12 +249,10 @@ class _SignUpScreenState extends BaseState<SignUpScreen> {
         focusNode: _emailFocus,
         textInputAction: TextInputAction.next,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        onTap: () => _requestFocus('email'),
         onFieldSubmitted: (term) {
           _fieldFocusChange(context, _emailFocus, _nameFocus);
         },
         validator: (value) {
-          FocusScope.of(context).requestFocus(_emailFocus);
           return StringHelper.validateEmail(context, value);
         },
         keyboardType: TextInputType.emailAddress,

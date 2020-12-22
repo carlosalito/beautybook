@@ -50,6 +50,7 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
             controller.selectedIndex == 2
                 ? _signOutAction(context)
                 : _profileAction(),
+            _updateMobx(),
           ],
         ),
         body: SafeArea(
@@ -84,21 +85,28 @@ class _NavigatorScreenState extends BaseState<NavigatorScreen> {
           items: [
             FFNavigationBarItem(
               iconData: BeautybookIcons.iconNewPost,
-              label: 'Posts',
+              label: translate('$_baseTranslate.buttons.posts'),
             ),
             FFNavigationBarItem(
               iconData: BeautybookIcons.boticario,
-              label: 'Novidades',
+              label: translate('$_baseTranslate.buttons.news'),
             ),
             if (appController.user != null && appController.user.uid != null)
               FFNavigationBarItem(
                 iconData: BeautybookIcons.iconProfile,
-                label: 'Perfil',
+                label: translate('$_baseTranslate.buttons.profile'),
               ),
           ],
         ),
       );
     });
+  }
+
+  Widget _updateMobx() {
+    return Text(
+      appController.language.toString(),
+      style: TextStyle(fontSize: 0),
+    );
   }
 
   Widget _profileAction() {

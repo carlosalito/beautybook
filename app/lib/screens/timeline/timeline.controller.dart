@@ -291,10 +291,11 @@ abstract class _TimelineControllerBase with Store {
 
   @action
   void manageNewPosts() {
+    final _date = HiveHelper.getValueInBox(Storage.lastRead) ?? DateTime.now();
+
     FirebaseFirestore.instance
         .collection(Collections.timeline)
-        .where('createdAt',
-            isGreaterThanOrEqualTo: HiveHelper.getValueInBox(Storage.lastRead))
+        .where('createdAt', isGreaterThanOrEqualTo: _date)
         .snapshots()
         .listen((data) {
       int _newItens = 0;

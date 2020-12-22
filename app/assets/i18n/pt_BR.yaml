@@ -42,6 +42,10 @@ navigator:
   profileHint: Perfil
   noLogged: Login
   signoutError: Erro ao sair da conta
+  buttons:
+    posts: Posts
+    news: Novidades
+    profile: Perfil
 timeline:
   listError: Erro ao lista posts.
   endList: Fim das postagens...
