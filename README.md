@@ -25,6 +25,7 @@ Microblogging e app de novidades.
 - Tela de edição do usuário;
 - Suporte as linguagens **Português - Brasil** e **Inglês - EUA**;
 - Modo escuro e modo claro;
+- Controle realtime de novas postagens na timeline;
 
 ## Distribuição
 A pasta *dist* contem os abis das 3 arquiteturas separadas, visando ter um menor apk no teste de uso. Contudo, normalmente, nos celulares atuais a arquitetura mais comum de ser encontrada é arm64 disponível em [beautybook arm64 apk](/dist/beautybook-arm64.apk)
