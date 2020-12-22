@@ -8,6 +8,7 @@ Microblogging e app de novidades.
 - A gestão de estado foi feita com **Mobx** com auxílio de injeção de dependências a partir do service locator **get_it**;
 - A persistência local dos dados foi feita com **Hive**; 
 - Controle de usuário e gestão de Json Web Token feita com **Firebase Auth**;
+- Desenvolvido com flutter versão 1.22.3 • channel stable
 
 ## Dados técnicos - Backend
 
