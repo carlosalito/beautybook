@@ -1,5 +1,6 @@
 import 'package:beautybook/app_controller.dart';
 import 'package:beautybook/core/injectable/injectable.dart';
+import 'package:beautybook/core/models/post/post_model.dart';
 import 'package:beautybook/screens/timeline/timeline.controller.dart';
 import 'package:beautybook/screens/timeline/widgets/galery_zoomable.dart';
 import 'package:beautybook/screens/timeline/widgets/image_cover.dart';
@@ -11,11 +12,13 @@ class ImagesTile extends StatelessWidget {
   final bool details;
   final List<String> galleryItems;
   final int index;
+  final PostModel post;
 
   final controller = getIt<TimelineController>();
   final appController = getIt<AppController>();
 
-  ImagesTile({this.images, this.details, this.galleryItems, this.index});
+  ImagesTile(
+      {this.images, this.details, this.galleryItems, this.index, this.post});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +49,8 @@ class ImagesTile extends StatelessWidget {
                 ),
               ),
             );
+          } else if (post != null) {
+            controller.postDetail(post);
           }
         },
         child: ImageCover(

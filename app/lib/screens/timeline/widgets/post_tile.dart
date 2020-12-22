@@ -49,7 +49,10 @@ class PostTile extends StatelessWidget {
             _postTitle(),
             _postBody(context),
             post.pictures != null && post.pictures.length > 0
-                ? ImagesTile(images: post.pictures)
+                ? ImagesTile(
+                    images: post.pictures,
+                    post: post,
+                  )
                 : Container()
           ],
         ),
