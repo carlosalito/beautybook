@@ -12,6 +12,15 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: TimelineRepository)
 class ApiTimelineRepository extends ApiBaseRepository<PostModel>
     implements TimelineRepository {
+  CommonHttp clientHttp;
+
+  ApiTimelineRepository([CommonHttp http]) {
+    if (http != null)
+      clientHttp = http;
+    else
+      clientHttp = CommonHttp();
+  }
+
   @override
   String get collectionPath => Collections.timeline;
 
@@ -23,7 +32,7 @@ class ApiTimelineRepository extends ApiBaseRepository<PostModel>
   @override
   Future<void> create(PostModel post) async {
     try {
-      final _result = await CommonHttp.apiPost(Endpoints.post, jsonEncode(post),
+      final _result = await clientHttp.apiPost(Endpoints.post, jsonEncode(post),
           public: false);
 
       if (_result.statusCode != 200) throw Exception(_result.body);
@@ -35,7 +44,7 @@ class ApiTimelineRepository extends ApiBaseRepository<PostModel>
   @override
   Future<void> updateGalery({String postId, List<String> pictures}) async {
     try {
-      final _result = await CommonHttp.apiPut(
+      final _result = await clientHttp.apiPut(
           Endpoints.updateGalery + postId, jsonEncode(pictures),
           public: false);
       if (_result.statusCode != 200) throw Exception(_result.body);
@@ -51,9 +60,8 @@ class ApiTimelineRepository extends ApiBaseRepository<PostModel>
   @override
   Future<Map<String, dynamic>> list(int page) async {
     try {
-      final _result = await CommonHttp.apiGet(
-          '${Endpoints.listPosts}${page.toString()}',
-          public: true);
+      final _result = await clientHttp
+          .apiGet('${Endpoints.listPosts}${page.toString()}', public: true);
 
       if (_result.statusCode == 200) {
         final _data = jsonDecode(_result.body);
@@ -71,7 +79,7 @@ class ApiTimelineRepository extends ApiBaseRepository<PostModel>
   @override
   Future<void> delete(String postId) async {
     try {
-      final _result = await CommonHttp.apiDelete('${Endpoints.post}/$postId',
+      final _result = await clientHttp.apiDelete('${Endpoints.post}/$postId',
           public: false);
 
       if (_result.statusCode != 200) throw Exception(_result.body);

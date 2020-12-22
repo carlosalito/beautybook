@@ -6,7 +6,9 @@ import 'package:beautybook/core/services/auth/auth_service.dart';
 import 'package:http/http.dart' as http;
 
 class CommonHttp {
-  static Future<bool> _storedTokenIsValid() async {
+  final http.Client clientHttp = http.Client();
+
+  Future<bool> _storedTokenIsValid() async {
     final lastTokenTime = await HiveHelper.getValueInBox(Storage.lastTokenTime);
 
     if (lastTokenTime != null) {
@@ -22,7 +24,7 @@ class CommonHttp {
     }
   }
 
-  static Future<String> _refreshToken(String token) async {
+  Future<String> _refreshToken(String token) async {
     final tokenIsValid = await _storedTokenIsValid();
 
     if (tokenIsValid && token != null && token.isNotEmpty) return token;
@@ -35,7 +37,7 @@ class CommonHttp {
     return token;
   }
 
-  static Future<String> _getToken(bool public) async {
+  Future<String> _getToken(bool public) async {
     String _token = Storage.publicToken;
     if (!public) {
       _token = HiveHelper.getValueInBox(Storage.token);
@@ -45,7 +47,7 @@ class CommonHttp {
     return _token;
   }
 
-  static Future<http.Response> apiPost(
+  Future<http.Response> apiPost(
     String url,
     param, {
     bool public,
@@ -65,7 +67,7 @@ class CommonHttp {
     return response;
   }
 
-  static Future<http.Response> apiPut(
+  Future<http.Response> apiPut(
     String url,
     dynamic param, {
     bool public,
@@ -85,7 +87,7 @@ class CommonHttp {
     return response;
   }
 
-  static Future<http.Response> apiDelete(
+  Future<http.Response> apiDelete(
     String url, {
     bool public,
   }) async {
@@ -103,7 +105,7 @@ class CommonHttp {
     return response;
   }
 
-  static Future<http.Response> apiGet(
+  Future<http.Response> apiGet(
     String url, {
     bool public,
     bool injectToken = true,
@@ -122,7 +124,7 @@ class CommonHttp {
       _headers.removeWhere(
           (key, value) => key == "Authorization" || key == "UserUid");
 
-    final http.Response response = await http.get(url, headers: _headers);
+    final http.Response response = await clientHttp.get(url, headers: _headers);
     return response;
   }
 }

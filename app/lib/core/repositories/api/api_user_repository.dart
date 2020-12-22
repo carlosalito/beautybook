@@ -11,6 +11,8 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: UserRepository)
 class ApiUserRepository extends ApiBaseRepository<UserModel>
     implements UserRepository {
+  final CommonHttp clientHttp = CommonHttp();
+
   @override
   String get collectionPath => 'user';
 
@@ -23,7 +25,7 @@ class ApiUserRepository extends ApiBaseRepository<UserModel>
   Future<UserModel> findById({String id}) async {
     try {
       final _url = Endpoints.me.replaceAll('#id', id);
-      final result = await CommonHttp.apiGet(_url, public: false);
+      final result = await clientHttp.apiGet(_url, public: false);
       if (result.statusCode == 200) {
         return UserModel.fromJson(jsonDecode(result.body));
       } else {
@@ -37,7 +39,7 @@ class ApiUserRepository extends ApiBaseRepository<UserModel>
   @override
   Future<UserResponseEnum> create(UserModel user) async {
     try {
-      final result = await CommonHttp.apiPost(Endpoints.user, jsonEncode(user),
+      final result = await clientHttp.apiPost(Endpoints.user, jsonEncode(user),
           public: true);
 
       if (result.statusCode == 200) {
@@ -58,7 +60,7 @@ class ApiUserRepository extends ApiBaseRepository<UserModel>
   Future<void> updateUserPicture(String action) async {
     try {
       final String url = '${Endpoints.updateUserPicture}$action';
-      final _result = await CommonHttp.apiGet(url, public: false);
+      final _result = await clientHttp.apiGet(url, public: false);
 
       if (_result.statusCode != 200) throw Exception(_result.body);
     } catch (e) {
@@ -71,7 +73,7 @@ class ApiUserRepository extends ApiBaseRepository<UserModel>
     try {
       final String url = Endpoints.user;
       final _result =
-          await CommonHttp.apiPut(url, jsonEncode(user), public: false);
+          await clientHttp.apiPut(url, jsonEncode(user), public: false);
 
       if (_result.statusCode != 200) throw Exception(_result.body);
     } catch (e) {

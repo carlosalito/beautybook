@@ -7,9 +7,11 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class ApiBoticarioNewsRepository {
+  final CommonHttp clientHttp = CommonHttp();
+
   Future<List<BoticarioNewsModel>> list() async {
     try {
-      final _result = await CommonHttp.apiGet(Endpoints.boticarioNews,
+      final _result = await clientHttp.apiGet(Endpoints.boticarioNews,
           public: true, injectToken: false);
 
       final _data = jsonDecode(utf8.decode(_result.bodyBytes))['news'] as List;
