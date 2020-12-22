@@ -16,6 +16,16 @@ Microblogging e app de novidades.
 - **Certbot** para gerenciar certificados SSL **Let's Encrypt**; 
 - Todo backend e suas ferramentas estão "containerizado" e orquestrado com docker-compose;
 
+## Tasks
+- [x] Tela de splash screen;
+- [x] Tela de login;
+- [x] Tela de cadastro de novo usuário;
+- [x] Tela para listar postagens;
+- [x] Tela para listar as últimas novidades;
+- [x] Tela para fazer um novo post;
+- [x] Possibilidade de editar e excluir um post próprio que foi publicado;
+- [x] Lista de postagens populada;
+
 ## Diferenciais (Opcionais)
 
 - Construção de toda um backend com controle de acesso via JWT e com segurança SSL;
