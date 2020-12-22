@@ -68,7 +68,7 @@ export class TimelineService {
           .set(postFire);
 
         await this.esService.esclient.indices.refresh({
-          index: COLLECTIONS.user
+          index: COLLECTIONS.timeline
         });
 
         resolve({ success: true });
@@ -108,7 +108,7 @@ export class TimelineService {
           .delete();
 
         await this.esService.esclient.indices.refresh({
-          index: COLLECTIONS.user
+          index: COLLECTIONS.timeline
         });
 
         resolve({ success: true });
