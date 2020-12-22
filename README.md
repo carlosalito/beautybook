@@ -28,14 +28,14 @@ Microblogging e app de novidades.
 
 ## Diferenciais (Opcionais)
 
-- Construção de toda um backend com controle de acesso via JWT e com segurança SSL;
-- Login social com **Google** e **Facebook**;
-- Foto no cadastro do usuário;
-- Fotos nos posts;
-- Tela de edição do usuário;
-- Suporte as linguagens **Português - Brasil** e **Inglês - EUA**;
-- Modo escuro e modo claro;
-- Controle realtime de novas postagens na timeline;
+- [x] Construção de toda um backend com controle de acesso via JWT e com segurança SSL;
+- [x] Login social com **Google** e **Facebook**;
+- [x] Foto no cadastro do usuário;
+- [x] Fotos nos posts;
+- [x] Tela de edição do usuário;
+- [x] Suporte as linguagens **Português - Brasil** e **Inglês - EUA**;
+- [x] Modo escuro e modo claro;
+- [x] Controle realtime de novas postagens na timeline;
 
 ## Distribuição
 A pasta *dist* contem os abis das 3 arquiteturas separadas, visando ter um menor apk no teste de uso. Contudo, normalmente, nos celulares atuais a arquitetura mais comum de ser encontrada é arm64 disponível em [beautybook arm64 apk](/dist/beautybook-arm64.apk)
