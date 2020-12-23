@@ -245,7 +245,9 @@ abstract class _TimelineControllerBase with Store {
   }
 
   _removeItemFromGalery(int index) {
-    pictures.removeAt(index);
+    final _tempPicture = pictures;
+    _tempPicture.removeAt(index);
+    pictures = [..._tempPicture];
   }
 
   _deleteTempFile(int index) {

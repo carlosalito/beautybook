@@ -15,7 +15,10 @@ class ApiBoticarioNewsRepository {
           public: true, injectToken: false);
 
       final _data = jsonDecode(utf8.decode(_result.bodyBytes))['news'] as List;
-      return _data.map((e) => BoticarioNewsModel.fromJson(e)).toList();
+      final _list = _data.map((e) => BoticarioNewsModel.fromJson(e)).toList();
+      _list.sort((a, b) => b.message.createdAt.compareTo(a.message.createdAt));
+
+      return _list;
     } catch (e) {
       throw Exception(e.toString());
     }

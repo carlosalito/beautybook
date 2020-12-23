@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'page_info_model.g.dart';
 
-@JsonSerializable(nullable: true, anyMap: true, genericArgumentFactories: true)
+@JsonSerializable(nullable: true, anyMap: true)
 class PageInfoModel {
   int totalRows;
   int totalPages;
