@@ -4,7 +4,9 @@ import 'package:beautybook/core/injectable/injectable.dart';
 import 'package:beautybook/core/models/user/user_model.dart';
 import 'package:beautybook/core/services/auth/auth_service.dart';
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
+@injectable
 class CommonHttp {
   final http.Client clientHttp = http.Client();
 

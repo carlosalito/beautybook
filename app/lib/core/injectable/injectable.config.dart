@@ -34,6 +34,7 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<ApiBoticarioNewsRepository>(() => ApiBoticarioNewsRepository());
+  gh.factory<CommonHttp>(() => CommonHttp());
   gh.factory<TimelineRepository>(
       () => ApiTimelineRepository(get<CommonHttp>()));
   gh.factory<UserRepository>(() => ApiUserRepository());
